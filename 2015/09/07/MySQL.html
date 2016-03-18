@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MySQL | LuoYe&#39;blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="数据库结构图+--------------------DataBase----------------------+|                                                  ||           Table 1                    Table 2     ||  .......,......,.....,......,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL">
+<meta property="og:url" content="http://blog.falleaf.com/2015/09/07/MySQL.html">
+<meta property="og:site_name" content="LuoYe'blog">
+<meta property="og:description" content="数据库结构图+--------------------DataBase----------------------+|                                                  ||           Table 1                    Table 2     ||  .......,......,.....,......,">
+<meta property="og:image" content="http://blog.falleaf.com/./MySQL.md_Attachments/2-MySQL权限管理基础_20141028161127.JPG">
+<meta property="og:updated_time" content="2016-03-18T09:58:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL">
+<meta name="twitter:description" content="数据库结构图+--------------------DataBase----------------------+|                                                  ||           Table 1                    Table 2     ||  .......,......,.....,......,">
+<meta name="twitter:image" content="http://blog.falleaf.com/./MySQL.md_Attachments/2-MySQL权限管理基础_20141028161127.JPG">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+
+
+	
+	<form id="search">
+	<input type="text" class="st-search-launcher" placeholder="search..."><button><i class="fa fa-search"></i> </button>
+	</form>
+	
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','1n-7fx-Zx9q6ig4dxYeV','2.0.0');
+</script>
+
+
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+
+
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">叶子的背叛</p>
+		
+<div>
+					<section class="switch-part switch-part1">
+						<nav class="header-menu">
+							<ul>
+							
+								<li><a href="/">主页</a></li>
+					        
+								<li><a href="/archives">归档</a></li>
+					        
+							</ul>
+						</nav>
+						<nav class="header-nav">
+							<div class="social">
+								
+									<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+						        
+									<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+						        
+							</div>
+						</nav>
+					</section>
+					
+					
+					<section class="switch-part switch-part2">
+						<div class="widget tagcloud" id="js-tagcloud">
+							<a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Linux-MySQL/" style="font-size: 10px;">Linux MySQL</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/smt32/" style="font-size: 13.33px;">smt32</a> <a href="/tags/stm32/" style="font-size: 13.33px;">stm32</a> <a href="/tags/飞控/" style="font-size: 13.33px;">飞控</a>
+						</div>
+					</section>
+					
+					
+					
+					<section class="switch-part switch-part3">
+						<div id="js-friends">
+						
+				          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hexo.io">hexo</a>
+				        
+				        </div>
+					</section>
+					
+
+					
+					
+					<section class="switch-part switch-part4">
+					
+						<div id="js-aboutme">一只游走于IT界的半调子猿猴...</div>
+					</section>
+									
+</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">LuoYe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+			</hgroup>
+
+			
+			<p class="header-subtitle">叶子的背叛</p>
+			
+
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-MySQL" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
+	      
+	      <i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>&nbsp;view
+	      
+	      
+	<i class="fa fa-file-word-o"></i>3,023&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux-MySQL/">Linux MySQL</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+
+	  	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+		
+<div id="toc" class="toc-article">
+	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库结构图"><span class="toc-text">数据库结构图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL安装"><span class="toc-text">MySQL安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL管理"><span class="toc-text">MySQL管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL数据编码"><span class="toc-text">MySQL数据编码</span></a></li></ol>
+</div>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><h3 id="数据库结构图"><a href="#数据库结构图" class="headerlink" title="数据库结构图"></a>数据库结构图</h3><figure class="highlight gherkin"><table><tr><td class="code"><pre><span class="line">+--------------------DataBase----------------------+</span><br><span class="line">|<span class="string">                                                  </span>|</span><br><span class="line">|<span class="string">           Table 1                    Table 2     </span>|</span><br><span class="line">|<span class="string">  .......,......,.....,......,       .....,....,  </span>|</span><br><span class="line">|<span class="string">  ,. 列  :  列 .,  列 ,.  列 :       , 列 : 列 :   </span>|</span><br><span class="line">|<span class="string">  ,. 表  ,  表  ,  表 ,.  表 ,       , 表 , 表 ,   </span>|</span><br><span class="line">|<span class="string">  ,. 1   :  2  .,  3  ,.  4  ,       , 1  : 2  ,  </span>|</span><br><span class="line">|<span class="string">  ,,.....;.....,:.....:,.....:       ,....;...,:  </span>|</span><br><span class="line">|<span class="string">  ,.     ,      ,     ,.     ,  ...  ,    ,    ,  </span>|</span><br><span class="line">|<span class="string">  ,.  D  ,  D   ,  D  ,.  D  ,  ...  , D  , D  ,  </span>|</span><br><span class="line">|<span class="string">  ,.  A  ,  A   ,  A  ,.  A  ,       , A  , A  ,  </span>|</span><br><span class="line">|<span class="string">  ,.  T  ,  T   ,  T  ,.  T  ,       , T  , T  ,  </span>|</span><br><span class="line">|<span class="string">  ,.  A  ,  A   ,  A  ,.  A  ,       , A  , A  ,  </span>|</span><br><span class="line">|<span class="string">  ,.     ,      ,     ,.     ,       ,    ,    ,  </span>|</span><br><span class="line">|<span class="string">  .......,......,.....,,.....,       .....,....,  </span>|</span><br><span class="line">+--------------------------------------------------+</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="MySQL安装"><a href="#MySQL安装" class="headerlink" title="MySQL安装"></a>MySQL安装</h3><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta"># yum list | grep mysql  </span></span><br><span class="line"><span class="meta"># yum install -y mysql-server   -- mysql 服务端    </span></span><br><span class="line"><span class="meta"># yum install -y mysql     --- mysql 客户端</span></span><br><span class="line"><span class="meta"># yum install -y mysql-devel    --- mysql开发库文件</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># service mysqld start    --- 启动 mysql</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>配置 mysql 用户密码</p>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="meta"># mysqladmin -u 用户名 -p 旧密码 password 新密码    ---  首次登录 mysql 时 root 用户没有密码可以省略<span class="string">" -p 旧密码"</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mysql 配置文件一般位于： <code>/etc/my.cnf</code> 文件.<em>(也有可能没有，需要手动添加)</em></p>
+</li>
+<li><p>mysql 数据库文件位于： <code>/var/lib/mysql/</code> 文件夹内.其中 <code>mysql/</code> 、<code>test/</code> 为mysql自带的数据库文件. 用户每建一个数据库此处都会对应一个数据库文件夹.</p>
+</li>
+<li><p>mysql 日志文件： <code>/var/log/mysqld.log</code></p>
+</li>
+<li><p>mysql 默认端口为 <code>3306/TCP</code> ( $netstat可查看)</p>
+</li>
+</ul>
+<h3 id="MySQL管理"><a href="#MySQL管理" class="headerlink" title="MySQL管理"></a>MySQL管理</h3><ul>
+<li>创建mysql用户：</li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">mysql&gt; CREATE <span class="keyword">USER</span> <span class="title">用户名 IDENTIFIED</span> BY ‘密码’ ;</span><br><span class="line">   <span class="comment">##Mysql 用户信息被保存在mysql数据库中的user表中.并且新创建的用户由于没有设置权限，将无法登录</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除/重命名 mysql用户：</li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">mysql&gt; DROP <span class="keyword">USER</span> <span class="title">用户名 ;</span><br><span class="line"></span><br><span class="line">mysql</span>&gt; RENAME <span class="keyword">USER</span> <span class="title">原用户名 TO</span> 新用户名 ;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改用户密码：</li>
+</ul>
+<figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line">mysql&gt; <span class="keyword">SET</span> PASSWORD = PASSWORD(<span class="string">'新密码'</span>) ;   -- 修改当前用户密码</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> 用户名 = PASSWORD(<span class="string">'新密码'</span>) ;  -- 修改指定用户密码</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Mysql 用户授权</li>
+</ul>
+<figure class="highlight hsp"><table><tr><td class="code"><pre><span class="line"><span class="meta"># 授予用户权限</span></span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES <span class="keyword">ON</span> 层级 to <span class="string">'用户名'</span>@<span class="string">'主机'</span> IDENTIFIED BY <span class="string">'密码'</span> <span class="comment">;</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 撤销用户权限</span></span><br><span class="line">mysql&gt; REVOKE ALL PRIVILEGES FROM  用户名 ；</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>层级：</p>
+<ol>
+<li>全局　　<code>*.*</code></li>
+<li>数据库层级　　 <code>DB_Name.*</code></li>
+<li>表层级</li>
+<li>列层级</li>
+<li>子程序层级</li>
+</ol>
+</blockquote>
+<p>2-MySQL权限管理基础_20141028161127.JPG<br><img src="./MySQL.md_Attachments/2-MySQL权限管理基础_20141028161127.JPG" alt="admin"></p>
+<ul>
+<li>MySQL数据的导入/导出</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="variable">$mysqldump</span> -u root -<span class="selector-tag">p</span> DB_Name &gt; Backup<span class="selector-class">.sql</span>    -- 数据库的导出备份</span><br><span class="line"></span><br><span class="line"><span class="variable">$mysql</span> -u root -<span class="selector-tag">p</span> DB_Name &lt; Backup<span class="selector-class">.sql</span>    --- 数据库的导入恢复</span><br></pre></td></tr></table></figure>
+<h3 id="MySQL数据编码"><a href="#MySQL数据编码" class="headerlink" title="MySQL数据编码"></a>MySQL数据编码</h3><p>MySQL默认编码为：</p>
+<blockquote>
+<p>character set ： <em>latin1</em><br>collation : <em>latin1_swedish_ci</em></p>
+</blockquote>
+<ul>
+<li><p>MySQL编码查看命令：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">mysql&gt; show <span class="keyword">character</span> <span class="built_in">set</span>;    <span class="comment">--- 查看MySQL所支持的编码格式</span></span><br><span class="line">mysql&gt; show variables like <span class="string">'character_set%'</span>;    <span class="comment">--- 查看当前mysql的编码</span></span><br><span class="line">mysql&gt; show variables like <span class="string">'collation%'</span>;    <span class="comment">--- "collation" 用于指定数据集如何排序，以及字符串的比对规则(http://zhongwei-leg.iteye.com/blog/899227)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>MySQL编码设置命令：</p>
+<figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">#创建数据时设置默认数据编码</span></span><br><span class="line">mysql&gt; create database DB_Name </span><br><span class="line">     &gt; <span class="keyword">default</span> character <span class="keyword">set</span> utf8</span><br><span class="line">     &gt; <span class="keyword">default</span> collate utf8_general_ci;</span><br><span class="line"><span class="meta">#修改一个数据库的编码</span></span><br><span class="line">mysql&gt; ALTER database DB_Name character <span class="keyword">set</span> utf8 collate utf8_general_ci;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>MySQL默认编码设置:   </p>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line">$vim /etc/my.cnf    -- 按照如下添加</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">init_connect=<span class="string">'SET NAMES utf8'</span></span><br><span class="line">   ...</span><br><span class="line">[client]</span><br><span class="line">default-character-set=utf8</span><br><span class="line"></span><br><span class="line">$service mysqld restart   -- 重启mysql</span><br><span class="line"></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##MySQL 数据库的操作</span></span><br><span class="line">SQL =  `Structured Query Language`  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#####  数据库操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#### 1. 创建数据库</span></span><br></pre></td></tr></table></figure>
+<p>mysql&gt; CREATE DATABASE 数据库名;<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">##### 2. 删除数据库</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; DROP DATABASE 数据库名;<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">##### 3. 查看数据库</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; SHOW DATABASES ;<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">##### 4. 重命名数据库</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt;  RENAME DATABASE 原数据库名 TO 新数据库名   —（此命令已经失效，不能再使用）<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">##### 5. 使用数据库</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; USE DB_Name;  – 通告MySQL把 DB_Name 数据库作为默认（当前）数据库使用，用于后续语句<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#### 数据库内表格操作   </span></span><br><span class="line"></span><br><span class="line"><span class="meta">##### 1. 创建数据表格</span></span><br><span class="line">创建表格之前需要事先使用 `USE` 命令设置数据库。</span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; CREATE TABLE &lt;表名&gt; (</p>
+<pre><code>&gt; &lt;字段名1&gt;    &lt;类型1&gt; ,
+&gt; &lt;字段名2&gt;    &lt;类型2&gt; ,
+&gt; &lt;字段名3&gt;    &lt;类型3&gt;
+&gt; );
+</code></pre><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">eg:</span><br><span class="line">mysql.png</span><br><span class="line">![<span class="string">create table</span>](<span class="link">./MySQL.md_Attachments/mysql.png</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">##### 2. 查看数据库内的表</span></span><br></pre></td></tr></table></figure>
+<p>mysql&gt; SHWO TableS;<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">##### 3.重命名数据表</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; ALTER TABLE old_table_name RENAME new_table_name ;<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">##### 4. 删除表格</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; DROP TABLE  Table_Name ;<br><figure class="highlight http"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="vala"><span class="meta">### 表格内列(字段)操作</span></span><br><span class="line"></span><br><span class="line"><span class="meta">##### 1. 查看表内的列(字段)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; DESCRIBE  Table_Name ;<br>或者<br>mysql&gt; DESC Table_Name ;<br><figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">##### 2</span>. 向表中添加一列<span class="comment">(字段)</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; ALTER TABLE table_name ADD 数据列名 类型 其他;<br><figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">##### 3</span>. 删除表中的列<span class="comment">(字段)</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; ALTER TABLE table_name DROP COLUMN 数据列名;<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">##### 4. 修改列的数据类型</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; ALTER TABLE table_name MODIFY 数据列名 修改后的类型;<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">##### 5. 重命名一个列</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; ALTER TABLE table_name MODIFY 原数据列名 修改后的列名 类型;<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#### 表格内数据操作</span></span><br><span class="line"></span><br><span class="line"><span class="meta">##### 1. 查询表内数据</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; SELECT <em> FROM  table_name ;   –  ‘</em>‘ 表示所有列内的数据<br>  或者<br>mysql&gt; SELECT  列名1,列名2,列名3  FROM  table_name ;   –   查询指定列表数据</p>
+<p> 按条件查询格式：<br>mysql&gt; SELECT 列(字段)名 FROM  表名  WHERE &lt;表达式&gt; ;<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">##### 2. 向表内插入数据</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; INSERT INTO  表名  VALUES (值1,值2,值3..);<br>  或者<br>mysql&gt; INSERT INTO 表名(列1,列2) VALUES (值1,值2) ;<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">##### 3. 删除表内数据</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; DELETE FROM 表名 WHERE 表达式 ;</p>
+<p>mysql&gt; DELETE * FROM 表名 ;   –  删除整个表内数据<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">##### 4. 修改表中数据</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; UPDATE 表名 SET 列名=新值 WHERE 条件;<br><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line">’WHERE 条件’ 需要精确匹配，避免误修改其它数据</span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##MySQL 进阶</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##### 1. 删除返回结构中的重复项 (**DISTINCT**)</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; SELECT DISTINCT 列名 FROM 表名 ;<br><figure class="highlight oxygene"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">##### <span class="number">2</span>. <span class="keyword">WHERE</span> 条件中逻辑组合 <span class="comment">(**AND &amp; OR**)</span></span><br></pre></td></tr></table></figure></p>
+<p>eg:<br>mysql&gt; SELECT * FROM 表名 WHERE 条件1 AND 条件2;</p>
+<p>mysql&gt; SELECT * FROM 表名 WHERE 条件1 OR 条件2;<br><figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">##### <span class="number">3</span>. 对返回结果排序 <span class="comment">(**ORDER BY**)</span></span><br></pre></td></tr></table></figure></p>
+<p>eg：<br>mysql&gt; SELECT <em> FROM 表名 ORDER BY 列名;<br> 或者<br>mysql&gt; SELECT </em> FROM 表名 ORDER BY 列名 DESC ; – DESC 代表倒序<br>```</p>
+<p>　　　　　　　　　　　　　　　　　　　　　　　—By <strong><code>LuoYe</code></strong> <em>[QQ:291268775]</em><br>　　　　　　　　　　　　　　　　　　　　　　　　　　　<em>2014/10/23</em></p>
+
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/07/Linux 磁盘管理之-LVM.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Linux 磁盘管理之-LVM
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/07/CentOS搭建VPN 之PPTP.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CentOS搭建VPN 之PPTP</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="MySQL" data-title="MySQL" data-url="http://blog.falleaf.com/2015/09/07/MySQL.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luoye"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 LuoYe
+        
+        <span id="busuanzi_container_site_uv">|&nbsp;您是本站第 <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 位访客</span>
+        
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten&nbsp;|&nbsp;<a href="/sitemap.xml" target="_blank">sitemap</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
