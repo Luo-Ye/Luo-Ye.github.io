@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>VCS - Git基本操作 | LuoYe&#39;blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Git 状态图：VCS = Version Control Systemgit-status">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VCS - Git基本操作">
+<meta property="og:url" content="http://blog.falleaf.com/2015/09/07/VCS - Git基本操作.html">
+<meta property="og:site_name" content="LuoYe'blog">
+<meta property="og:description" content="Git 状态图：VCS = Version Control Systemgit-status">
+<meta property="og:updated_time" content="2016-03-18T09:35:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VCS - Git基本操作">
+<meta name="twitter:description" content="Git 状态图：VCS = Version Control Systemgit-status">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+
+
+	
+	<form id="search">
+	<input type="text" class="st-search-launcher" placeholder="search..."><button><i class="fa fa-search"></i> </button>
+	</form>
+	
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','1n-7fx-Zx9q6ig4dxYeV','2.0.0');
+</script>
+
+
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+
+
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">叶子的背叛</p>
+		
+<div>
+					<section class="switch-part switch-part1">
+						<nav class="header-menu">
+							<ul>
+							
+								<li><a href="/">主页</a></li>
+					        
+								<li><a href="/archives">归档</a></li>
+					        
+							</ul>
+						</nav>
+						<nav class="header-nav">
+							<div class="social">
+								
+									<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+						        
+									<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+						        
+							</div>
+						</nav>
+					</section>
+					
+					
+					<section class="switch-part switch-part2">
+						<div class="widget tagcloud" id="js-tagcloud">
+							<a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/smt32/" style="font-size: 13.33px;">smt32</a> <a href="/tags/stm32/" style="font-size: 13.33px;">stm32</a> <a href="/tags/飞控/" style="font-size: 13.33px;">飞控</a>
+						</div>
+					</section>
+					
+					
+					
+					<section class="switch-part switch-part3">
+						<div id="js-friends">
+						
+				          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hexo.io">hexo</a>
+				        
+				        </div>
+					</section>
+					
+
+					
+					
+					<section class="switch-part switch-part4">
+					
+						<div id="js-aboutme">一只游走于IT界的半调子猿猴...</div>
+					</section>
+									
+</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">LuoYe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+			</hgroup>
+
+			
+			<p class="header-subtitle">叶子的背叛</p>
+			
+
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-VCS - Git基本操作" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      VCS - Git基本操作
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
+	      
+	      <i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>&nbsp;view
+	      
+	      
+	<i class="fa fa-file-word-o"></i>1,488&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+
+	  	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+		
+<div id="toc" class="toc-article">
+	<ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Git-状态图："><span class="toc-number">1.</span> <span class="toc-text">Git 状态图：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化配置"><span class="toc-number"></span> <span class="toc-text">初始化配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-本地操作"><span class="toc-number"></span> <span class="toc-text">Git 本地操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-远程仓库操作"><span class="toc-number"></span> <span class="toc-text">Git 远程仓库操作</span></a>
+</div>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><h5 id="Git-状态图："><a href="#Git-状态图：" class="headerlink" title="Git 状态图："></a>Git 状态图：</h5><p><code>VCS = Version Control System</code><br><a href="/resource/git/git-status.png">git-status</a></p>
+<a id="more"></a>
+<h4 id="初始化配置"><a href="#初始化配置" class="headerlink" title="初始化配置"></a>初始化配置</h4><ul>
+<li><p>设置用户名</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">$ git config --global  user<span class="selector-class">.name</span> <span class="string">"Your_Usrname"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置用户邮箱</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">$ git config --global user<span class="selector-class">.email</span> <span class="string">"You Email"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看 Git 配置信息</p>
+<figure class="highlight sqf"><table><tr><td class="code"><pre><span class="line">$ git config --<span class="built_in">list</span></span><br><span class="line">    <span class="built_in">OR</span></span><br><span class="line">$ git config  user.<span class="built_in">name</span>    <span class="comment">//  查看指定配置</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化 Git Repository</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ </span>git init</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立 Git</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">$ git <span class="keyword">clone</span> <span class="title">Url</span>   // 从远端仓库同步一个 Git 仓库</span><br><span class="line">    RO</span><br><span class="line">$ git <span class="keyword">clone</span> <span class="title">--bare</span>   // 建立一个本地 Git 仓库(保存元数据和对象数据库,用户Git服务器)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Git-本地操作"><a href="#Git-本地操作" class="headerlink" title="Git 本地操作"></a>Git 本地操作</h4><ul>
+<li><p>查看帮助</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ </span>git help</span><br><span class="line">    OR</span><br><span class="line"><span class="variable">$ </span>git </span><br><span class="line"><span class="variable">$ </span>git help  Specified_Command    /<span class="regexp">/   查看指定命令的帮助信息</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看git内文件状态</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ </span>git status</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>向git repo 添加文件追踪/暂存文件</p>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">add</span>  File</span><br><span class="line">$ git <span class="built_in">add</span>  .　<span class="comment">　// 添加&amp;暂存 所有文件</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移除某文件</p>
+<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line"><span class="comment">//  完全移除(先删除文件实体，再执行此命令)</span></span><br><span class="line">$ git <span class="keyword">rm</span> <span class="keyword">File</span>  </span><br><span class="line"><span class="comment">// 从暂存区域移除，但文件实体不删除</span></span><br><span class="line">$ git <span class="keyword">rm</span> --cached <span class="keyword">File</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提交到本地repo</p>
+<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line">$ git commit -<span class="keyword">m</span>  <span class="string">"Description"</span>      <span class="comment">// 把暂存区内容提交</span></span><br><span class="line">$ git commit -a -<span class="keyword">m</span> <span class="string">"Description"</span>   <span class="comment">// 直接提交到 git repo</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>撤消操作<br>修改最后一次提交</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">$ git <span class="keyword">commit</span> <span class="comment">--amend</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>取消已经暂存的文件<br><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">reset</span> <span class="keyword">HEAD</span> &lt;<span class="keyword">file</span>&gt;...</span><br></pre></td></tr></table></figure></p>
+<p>取消对文件的修改<br><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">git checkout <span class="comment">-- &lt;file&gt;...</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>查看提交log<figure class="highlight haml"><table><tr><td class="code"><pre><span class="line">$ git log </span><br><span class="line">    -<span class="ruby">p      显示每次提交的内容差异</span><br><span class="line"></span>    -<span class="ruby">Nu     仅显示最近的 Nu 的次更新</span><br><span class="line"></span>    -<span class="ruby">-stat  仅显示简要的增改行数统计</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Git-远程仓库操作"><a href="#Git-远程仓库操作" class="headerlink" title="Git 远程仓库操作"></a>Git 远程仓库操作</h4><ul>
+<li><p>查看当前的远程库</p>
+<figure class="highlight smalltalk"><table><tr><td class="code"><pre><span class="line">// 列出每个远程库的简短名字</span><br><span class="line"><span class="string">$ </span>git  remote </span><br><span class="line">    <span class="type">OR</span></span><br><span class="line">// 列出详情 (<span class="comment">"-v"</span> = <span class="comment">"--verbose"</span>)</span><br><span class="line"><span class="string">$ </span>git remote -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加远程库</p>
+<figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">$ git remote add  <span class="string">[Shortname]</span> <span class="string">[Url]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>远程仓库抓取数据</p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// fetch 命令只是将远端的数据拉到本地仓库，并不自动合并到当前工作分支</span></span><br><span class="line">$ git fetch [remote-name]</span><br><span class="line"><span class="comment">// 抓取数据，然后将远端分支自动合并到本地仓库中当前分支</span></span><br><span class="line">$ git pull [remote-name]  <span class="params">&lt;远程分支名&gt;</span>:<span class="params">&lt;本地分支名&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>推送数据到远程仓库</p>
+<figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">$ git push <span class="string">[remote-name]</span> <span class="string">[branch-name]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看远程仓库信息</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">git remote <span class="keyword">show</span> [remote-<span class="keyword">name</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>远程仓库的删除和重命名</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">$ git remote <span class="keyword">rename</span> [R-<span class="keyword">name</span>] [R-<span class="keyword">name</span>]</span><br><span class="line">$ git remote rm [Remote-<span class="keyword">name</span>]</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/07/CentOS搭建VPN 之PPTP.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          CentOS搭建VPN 之PPTP
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/07/Git 进阶.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Git 进阶</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="VCS - Git基本操作" data-title="VCS - Git基本操作" data-url="http://blog.falleaf.com/2015/09/07/VCS - Git基本操作.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luoye"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 LuoYe
+        
+        <span id="busuanzi_container_site_uv">|&nbsp;您是本站第 <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 位访客</span>
+        
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten&nbsp;|&nbsp;<a href="/sitemap.xml" target="_blank">sitemap</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>

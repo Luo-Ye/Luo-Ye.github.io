@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Git 进阶 | LuoYe&#39;blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Git 命令别名$ git config --global alias.[Shortcut] [Command]
+Git *nix自动补全$ cd ~$ curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git 进阶">
+<meta property="og:url" content="http://blog.falleaf.com/2015/09/07/Git 进阶.html">
+<meta property="og:site_name" content="LuoYe'blog">
+<meta property="og:description" content="Git 命令别名$ git config --global alias.[Shortcut] [Command]
+Git *nix自动补全$ cd ~$ curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash">
+<meta property="og:updated_time" content="2016-03-18T09:41:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git 进阶">
+<meta name="twitter:description" content="Git 命令别名$ git config --global alias.[Shortcut] [Command]
+Git *nix自动补全$ cd ~$ curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+
+
+	
+	<form id="search">
+	<input type="text" class="st-search-launcher" placeholder="search..."><button><i class="fa fa-search"></i> </button>
+	</form>
+	
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','1n-7fx-Zx9q6ig4dxYeV','2.0.0');
+</script>
+
+
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+
+
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">叶子的背叛</p>
+		
+<div>
+					<section class="switch-part switch-part1">
+						<nav class="header-menu">
+							<ul>
+							
+								<li><a href="/">主页</a></li>
+					        
+								<li><a href="/archives">归档</a></li>
+					        
+							</ul>
+						</nav>
+						<nav class="header-nav">
+							<div class="social">
+								
+									<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+						        
+									<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+						        
+							</div>
+						</nav>
+					</section>
+					
+					
+					<section class="switch-part switch-part2">
+						<div class="widget tagcloud" id="js-tagcloud">
+							<a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/smt32/" style="font-size: 13.33px;">smt32</a> <a href="/tags/stm32/" style="font-size: 13.33px;">stm32</a> <a href="/tags/飞控/" style="font-size: 13.33px;">飞控</a>
+						</div>
+					</section>
+					
+					
+					
+					<section class="switch-part switch-part3">
+						<div id="js-friends">
+						
+				          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hexo.io">hexo</a>
+				        
+				        </div>
+					</section>
+					
+
+					
+					
+					<section class="switch-part switch-part4">
+					
+						<div id="js-aboutme">一只游走于IT界的半调子猿猴...</div>
+					</section>
+									
+</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">LuoYe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+			</hgroup>
+
+			
+			<p class="header-subtitle">叶子的背叛</p>
+			
+
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Git 进阶" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Git 进阶
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
+	      
+	      <i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>&nbsp;view
+	      
+	      
+	<i class="fa fa-file-word-o"></i>494&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+
+	  	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+		
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><h4 id="Git-命令别名"><a href="#Git-命令别名" class="headerlink" title="Git 命令别名"></a>Git 命令别名</h4><figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ git config --global alias.<span class="string">[Shortcut]</span> <span class="string">[Command]</span></span><br></pre></td></tr></table></figure>
+<h4 id="Git-nix自动补全"><a href="#Git-nix自动补全" class="headerlink" title="Git *nix自动补全"></a>Git *nix自动补全</h4><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$ </span>cd ~</span><br><span class="line"></span><br><span class="line"><span class="variable">$ </span>curl <span class="symbol">https:</span>/<span class="regexp">/raw.github.com/git</span><span class="regexp">/git/master</span><span class="regexp">/contrib/completion</span><span class="regexp">/git-completion.bash -o ~/</span>.git-completion.bash</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="Git-分支"><a href="#Git-分支" class="headerlink" title="Git 分支"></a>Git 分支</h4><ul>
+<li>查看建branch</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$ </span>git branch</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建branch</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ git branch Branch-<span class="built_in">name</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注： <code>git branch</code> 仅仅是建立了一个新的分支，但不会自动切换到这个分支中去。</p>
+</blockquote>
+<ul>
+<li>切换 branch</li>
+</ul>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ git checkout <span class="keyword">Branch-name</span><br><span class="line"></span></span><br><span class="line">// 加上 `-<span class="keyword">b` </span>选项表示创建并切换</span><br></pre></td></tr></table></figure>
+<ul>
+<li>合并 branch 至当前分支</li>
+</ul>
+<figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ git <span class="built_in">merge</span> Branch-<span class="keyword">name</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除 branch </li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ git branch -d Branch-<span class="built_in">name</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>未完待续…</p>
+
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/07/VCS - Git基本操作.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          VCS - Git基本操作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/07/IP网址科普.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">IP网址科普</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Git 进阶" data-title="Git 进阶" data-url="http://blog.falleaf.com/2015/09/07/Git 进阶.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luoye"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 LuoYe
+        
+        <span id="busuanzi_container_site_uv">|&nbsp;您是本站第 <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 位访客</span>
+        
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten&nbsp;|&nbsp;<a href="/sitemap.xml" target="_blank">sitemap</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>

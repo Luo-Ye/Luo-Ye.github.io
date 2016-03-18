@@ -3,20 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>find-linux-command | LuoYe&#39;blog</title>
+  <title>高效 Linux | LuoYe&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="linux find,linux命令">
+  <meta name="description" content="Linux基础加油站
+摘要:鉴于命令行的简洁，高效，它成为linux技术人员必须熟练掌握的技能之一.所以在此分享一些Linux命令行下常见并实用的技巧，同时也作为自己的学习笔记.
+
+1. Linux 命令行提示字符串着色情景: 提示符着色，可以使我们在繁多的输出中区分开各个命令的输出结果.linux中环境变量 PS1 代表着命令提示符的属性，默认为：\u@\h: \w\$">
 <meta property="og:type" content="article">
-<meta property="og:title" content="find-linux-command">
-<meta property="og:url" content="http://blog.falleaf.com/2015/09/07/find-linux-command.html">
+<meta property="og:title" content="高效 Linux">
+<meta property="og:url" content="http://blog.falleaf.com/2015/09/07/ 高效 Linux.html">
 <meta property="og:site_name" content="LuoYe'blog">
-<meta property="og:description" content="linux find,linux命令">
-<meta property="og:image" content="http://falleaf.oss-cn-shenzhen.aliyuncs.com/blog_source%2F2015-09%2Flinux-command.jpg">
-<meta property="og:updated_time" content="2016-02-29T08:48:55.000Z">
+<meta property="og:description" content="Linux基础加油站
+摘要:鉴于命令行的简洁，高效，它成为linux技术人员必须熟练掌握的技能之一.所以在此分享一些Linux命令行下常见并实用的技巧，同时也作为自己的学习笔记.
+
+1. Linux 命令行提示字符串着色情景: 提示符着色，可以使我们在繁多的输出中区分开各个命令的输出结果.linux中环境变量 PS1 代表着命令提示符的属性，默认为：\u@\h: \w\$">
+<meta property="og:updated_time" content="2016-03-18T09:30:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="find-linux-command">
-<meta name="twitter:description" content="linux find,linux命令">
-<meta name="twitter:image" content="http://falleaf.oss-cn-shenzhen.aliyuncs.com/blog_source%2F2015-09%2Flinux-command.jpg">
+<meta name="twitter:title" content="高效 Linux">
+<meta name="twitter:description" content="Linux基础加油站
+摘要:鉴于命令行的简洁，高效，它成为linux技术人员必须熟练掌握的技能之一.所以在此分享一些Linux命令行下常见并实用的技巧，同时也作为自己的学习笔记.
+
+1. Linux 命令行提示字符串着色情景: 提示符着色，可以使我们在繁多的输出中区分开各个命令的输出结果.linux中环境变量 PS1 代表着命令提示符的属性，默认为：\u@\h: \w\$">
   
   
     <link rel="icon" href="/favicon.png">
@@ -156,7 +163,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-find-linux-command" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post- 高效 Linux" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
     
@@ -167,7 +174,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      find-linux-command
+      高效 Linux
     </h1>
   
 
@@ -181,7 +188,7 @@
 	      <i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>&nbsp;view
 	      
 	      
-	<i class="fa fa-file-word-o"></i>1,186&nbsp;word
+	<i class="fa fa-file-word-o"></i>441&nbsp;word
 
 	      
 
@@ -205,97 +212,29 @@
 
 
 	  	
-<div class="gallery">
-  <div class="photoset"  style="text-align: center; width: 85%; margin:auto;">
-    
-      
-        <img src="http://falleaf.oss-cn-shenzhen.aliyuncs.com/blog_source%2F2015-09%2Flinux-command.jpg">
-      
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-	
   
     <div class="article-entry" itemprop="articleBody">
 
       
 		
-<div id="toc" class="toc-article">
-	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令格式："><span class="toc-number">1.</span> <span class="toc-text">命令格式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令参数："><span class="toc-number">2.</span> <span class="toc-text">命令参数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令选项："><span class="toc-number">3.</span> <span class="toc-text">命令选项：</span></a></li></ol>
-</div>
-
-
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;Linux下find命令在目录结构中搜索文件，并执行指定的操作。Linux下find命令提供了相当多的查找条件，功能很强大.在运行一个非常消耗资源的find命令时，很多人都倾向于把它放在后台执行，因为遍历一个大的文件系统可能会花费很长的时间(这里是指30G字节以上的文件系统)</p>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><h3 id="Linux基础加油站"><a href="#Linux基础加油站" class="headerlink" title="Linux基础加油站"></a>Linux基础加油站</h3><blockquote>
+<h5 id="摘要"><a href="#摘要" class="headerlink" title="摘要:"></a>摘要:</h5><p>鉴于命令行的简洁，高效，它成为linux技术人员必须熟练掌握的技能之一.所以在此分享一些Linux命令行下常见并实用的技巧，同时也作为自己的学习笔记.</p>
 </blockquote>
-<h3 id="命令格式："><a href="#命令格式：" class="headerlink" title="命令格式："></a>命令格式：</h3><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ <span class="keyword">find</span> pathname -<span class="keyword">options</span> [-<span class="keyword">print</span> -exec -ok ...]</span><br></pre></td></tr></table></figure>
+<h5 id="1-Linux-命令行提示字符串着色"><a href="#1-Linux-命令行提示字符串着色" class="headerlink" title="1. Linux 命令行提示字符串着色"></a>1. Linux 命令行提示字符串着色</h5><p><strong>情景</strong>: 提示符着色，可以使我们在繁多的输出中区分开各个命令的输出结果.linux中环境变量 <code>PS1</code> 代表着命令提示符的属性，默认为：<code>\u@\h: \w\$</code></p>
 <a id="more"></a>
-<h3 id="命令参数："><a href="#命令参数：" class="headerlink" title="命令参数："></a>命令参数：</h3><p>pathname: find命令所查找的目录路径。例如用.来表示当前目录，用/来表示系统根目录。 </p>
-<p>-print： find命令将匹配的文件输出到标准输出。 </p>
-<p>-exec： find命令对匹配的文件执行该参数所给出的shell命令。相应命令的形式为’command’ {  } \;，注意{   }和\；之间的空格。 </p>
-<p>-ok： 和-exec的作用相同，只不过以一种更为安全的模式来执行该参数所给出的shell命令，在执行每一个命令之前，都会给出提示，让用户来确定是否执行。</p>
-<h3 id="命令选项："><a href="#命令选项：" class="headerlink" title="命令选项："></a>命令选项：</h3><ul>
-<li><p>-name&nbsp;&nbsp;&nbsp;&nbsp;按照文件名查找文件。</p>
-</li>
-<li><p>-perm&nbsp;&nbsp;&nbsp;&nbsp;按照文件权限来查找文件。</p>
-</li>
-<li><p>-prune &nbsp;&nbsp;&nbsp;&nbsp;使用这一选项可以使find命令不在当前指定的目录中查找，如果同时使用-depth选项，那么-prune将被find命令忽略。</p>
-</li>
-<li><p>-user &nbsp;&nbsp;&nbsp;&nbsp;按照文件属主来查找文件。</p>
-</li>
-<li><p>-group&nbsp;&nbsp;&nbsp;&nbsp;按照文件所属的组来查找文件。</p>
-</li>
-<li><p>-mtime -n +n&nbsp;&nbsp;&nbsp;&nbsp;按照文件的更改时间来查找文件， - n表示文件更改时间距现在n天以内，+ n表示文件更改时间距现在n天以前。find命令还有-atime和-ctime 选项，但它们都和-m time选项。</p>
-</li>
-<li><p>-nogroup&nbsp;&nbsp;&nbsp;&nbsp;查找无有效所属组的文件，即该文件所属的组在/etc/groups中不存在。</p>
-</li>
-<li><p>-nouser&nbsp;&nbsp;&nbsp;&nbsp;查找无有效属主的文件，即该文件的属主在/etc/passwd中不存在。</p>
-</li>
-<li><p>-newer file1 ! file2&nbsp;&nbsp;&nbsp;&nbsp;查找更改时间比文件file1新但比文件file2旧的文件。</p>
-</li>
-<li><p>-type&nbsp;&nbsp;&nbsp;&nbsp;查找某一类型的文件，诸如：</p>
-<blockquote>
-<p>b - 块设备文件。<br>d - 目录。<br>c - 字符设备文件。<br>p - 管道文件。<br>l - 符号链接文件。<br>f - 普通文件。</p>
-</blockquote>
-</li>
-</ul>
+<p><strong>方法</strong>: </p>
 <ul>
-<li><p>-size n：[c]查找文件长度为n块的文件，带有c时表示文件长度以字节计。</p>
-</li>
-<li><p>-depth：在查找文件时，首先查找当前目录中的文件，然后再在其子目录中查找。</p>
-</li>
-<li><p>-fstype：查找位于某一类型文件系统中的文件，这些文件系统类型通常可以在配置文件/etc/fstab中找到，该配置文件中包含了本系统中有关文件系统的信息。</p>
-</li>
-<li><p>-mount：在查找文件时不跨越文件系统mount点。</p>
-</li>
-<li><p>-follow：如果find命令遇到符号链接文件，就跟踪至链接所指向的文件。</p>
-</li>
-<li><p>-cpio：对匹配的文件使用cpio命令，将这些文件备份到磁带设备中。</p>
-</li>
+<li>编辑  <code>~/.bash_profile</code>，添加如下语句修改 PS1 的属性(仅当前用户生效，重启系统)</li>
 </ul>
-<p>另外,下面三个的区别:</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"> # 修改命令提示字符串为绿色</span><br><span class="line">PS1="\[<span class="string">\e[32m\</span>][<span class="symbol">\u@\h \w</span>]\\$\[\e[0m\]"</span><br><span class="line"></span><br><span class="line">export PS1</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>-amin n   查找系统中最后N分钟访问的文件</p>
+<li><p>修改 <code>/etc/bashrc</code> 中 PS1 （所有用户生效，重启终端）</p>
 </li>
-<li><p>-atime n  查找系统中最后n*24小时访问的文件</p>
-</li>
-<li><p>-cmin n   查找系统中最后N分钟被改变文件状态的文件</p>
-</li>
-<li><p>-ctime n  查找系统中最后n*24小时被改变文件状态的文件</p>
-</li>
-<li><p>-mmin n   查找系统中最后N分钟被改变文件数据的文件</p>
-</li>
-<li><p>-mtime n  查找系统中最后n*24小时被改变文件数据的文件</p>
+<li><p>在 <code>/etc/profile</code> 中修改 PS1 环境变量值.（所有用户生效，重启系统）</p>
 </li>
 </ul>
-<p><strong><code>传送门：</code></strong></p>
-<ol>
-<li><a href="http://www.cnblogs.com/peida/archive/2012/11/13/2767374.html" target="_blank" rel="external">竹子博客</a></li>
-</ol>
+<hr>
+<p><strong>传送门</strong>:<a href="http://www.linuxdiyf.com/bbs/thread-135300-1-1.html" target="_blank" rel="external">linux PS1 提示符定义–让你的提示符多姿多彩</a></p>
 
       
     </div>
@@ -306,18 +245,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/09/07/Linux 磁盘管理之-LVM.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/09/07/linux - man.html" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Linux 磁盘管理之-LVM
+          linux - man
         
       </div>
     </a>
   
   
-    <a href="/2015/09/07/CentOS搭建VPN 之PPTP.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">CentOS搭建VPN 之PPTP</div>
+    <a href="/2015/09/05/Hexo博客个性化.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hexo站点个性化</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -332,7 +271,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="find-linux-command" data-title="find-linux-command" data-url="http://blog.falleaf.com/2015/09/07/find-linux-command.html"></div>
+	<div class="ds-thread" data-thread-key=" 高效 Linux" data-title="高效 Linux" data-url="http://blog.falleaf.com/2015/09/07/ 高效 Linux.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

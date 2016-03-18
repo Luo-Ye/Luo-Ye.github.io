@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>飞控开发 -- PID | LuoYe&#39;blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="PID = Proportional - Integral - Differential （比例积分微分）是历史最悠久，应用最广，适应性最强的控制方法.在工控中 PID 控制算法占到 90%
+
+PID 图解模型
+PID控制公式：
+u(t)=KPe(t)+KI∫0te(t)dt+KDde(t)dtu(t) = K_Pe(t) + K_I \int_{0}^{t}e(t)dt + K_D\frac{">
+<meta property="og:type" content="article">
+<meta property="og:title" content="飞控开发 -- PID">
+<meta property="og:url" content="http://blog.falleaf.com/2016/03/05/飞控开发－PID.html">
+<meta property="og:site_name" content="LuoYe'blog">
+<meta property="og:description" content="PID = Proportional - Integral - Differential （比例积分微分）是历史最悠久，应用最广，适应性最强的控制方法.在工控中 PID 控制算法占到 90%
+
+PID 图解模型
+PID控制公式：
+u(t)=KPe(t)+KI∫0te(t)dt+KDde(t)dtu(t) = K_Pe(t) + K_I \int_{0}^{t}e(t)dt + K_D\frac{">
+<meta property="og:image" content="http://blog.falleaf.com/resource/fly/fly.jpg">
+<meta property="og:updated_time" content="2016-03-18T08:51:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="飞控开发 -- PID">
+<meta name="twitter:description" content="PID = Proportional - Integral - Differential （比例积分微分）是历史最悠久，应用最广，适应性最强的控制方法.在工控中 PID 控制算法占到 90%
+
+PID 图解模型
+PID控制公式：
+u(t)=KPe(t)+KI∫0te(t)dt+KDde(t)dtu(t) = K_Pe(t) + K_I \int_{0}^{t}e(t)dt + K_D\frac{">
+<meta name="twitter:image" content="http://blog.falleaf.com/resource/fly/fly.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+
+
+	
+	<form id="search">
+	<input type="text" class="st-search-launcher" placeholder="search..."><button><i class="fa fa-search"></i> </button>
+	</form>
+	
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','1n-7fx-Zx9q6ig4dxYeV','2.0.0');
+</script>
+
+
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+
+
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">叶子的背叛</p>
+		
+<div>
+					<section class="switch-part switch-part1">
+						<nav class="header-menu">
+							<ul>
+							
+								<li><a href="/">主页</a></li>
+					        
+								<li><a href="/archives">归档</a></li>
+					        
+							</ul>
+						</nav>
+						<nav class="header-nav">
+							<div class="social">
+								
+									<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+						        
+									<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+						        
+							</div>
+						</nav>
+					</section>
+					
+					
+					<section class="switch-part switch-part2">
+						<div class="widget tagcloud" id="js-tagcloud">
+							<a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/smt32/" style="font-size: 13.33px;">smt32</a> <a href="/tags/stm32/" style="font-size: 13.33px;">stm32</a> <a href="/tags/飞控/" style="font-size: 13.33px;">飞控</a>
+						</div>
+					</section>
+					
+					
+					
+					<section class="switch-part switch-part3">
+						<div id="js-friends">
+						
+				          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hexo.io">hexo</a>
+				        
+				        </div>
+					</section>
+					
+
+					
+					
+					<section class="switch-part switch-part4">
+					
+						<div id="js-aboutme">一只游走于IT界的半调子猿猴...</div>
+					</section>
+									
+</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">LuoYe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+			</hgroup>
+
+			
+			<p class="header-subtitle">叶子的背叛</p>
+			
+
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-飞控开发－PID" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      飞控开发 -- PID
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2016-03-05</i>
+	      
+	      <i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>&nbsp;view
+	      
+	      
+	<i class="fa fa-file-word-o"></i>2,243&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smt32/">smt32</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/飞控/">飞控</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+
+	  	
+<div class="gallery">
+  <div class="photoset"  style="text-align: center; width: 85%; margin:auto;">
+    
+      
+        <img src="/resource/fly/fly.jpg">
+      
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+		
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><blockquote>
+<p>PID = Proportional - Integral - Differential （比例积分微分）<br>是历史最悠久，应用最广，适应性最强的控制方法.在工控中 PID 控制算法占到 90%</p>
+</blockquote>
+<h4 id="PID-图解模型"><a href="#PID-图解模型" class="headerlink" title="PID 图解模型"></a>PID 图解模型</h4><p><img src="/resource/fly/pid.png" alt="pid"></p>
+<p>PID控制公式：</p>
+<div style="text-align:center;"><br><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msub><mi>K</mi><mi>P</mi></msub><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>+</mo><msub><mi>K</mi><mi>I</mi></msub><msubsup><mo>∫</mo><mrow><mn>0</mn></mrow><mrow><mi>t</mi></mrow></msubsup><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo><mi>d</mi><mi>t</mi><mo>+</mo><msub><mi>K</mi><mi>D</mi></msub><mfrac><mrow><mi>d</mi><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">u(t) = K_Pe(t) + K_I \int_{0}^{t}e(t)dt + K_D\frac{de(t)}{dt} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.01em;"></span><span class="strut bottom" style="height:1.36612em;vertical-align:-0.35612em;"></span><span class="base textstyle uncramped"><span class="mord mathit">u</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.13889em;">P</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mbin">+</span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.07847em;">I</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mop"><span class="op-symbol small-op mop" style="margin-right:0.19445em;top:-0.0005599999999999772em;">∫</span><span class="vlist"><span style="top:0.35612em;margin-left:-0.19445em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathrm">0</span></span></span></span><span style="top:-0.41900000000000004em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">t</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mord mathit">d</span><span class="mord mathit">t</span><span class="mbin">+</span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.02778em;">D</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord reset-textstyle textstyle uncramped"><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.345em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit">d</span><span class="mord mathit">t</span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.485em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">d</span><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span><br></div>
+
+<a id="more"></a>
+<p>上式中：<br><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mi>r</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>−</mo><mi>y</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">e(t) = r(t) - y(t)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mbin">−</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span></span></span></span></p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">e(t)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span></span></span></span> -- 偏差值/误差值
+- <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">r(t)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span></span></span></span> – 输入值</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">y(t)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span></span></span></span> -- 实际输出
+- <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>K</mi><mi>P</mi></msub></mrow><annotation encoding="application/x-tex">K_P</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.13889em;">P</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span> – 比例系数</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>K</mi><mi>I</mi></msub></mrow><annotation encoding="application/x-tex">K_I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.07847em;">I</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span> -- 积分时间常数
+- <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>K</mi><mi>D</mi></msub></mrow><annotation encoding="application/x-tex">K_D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.02778em;">D</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span> – 微分时间常数</li>
+</ul>
+<h4 id="PID模型分析："><a href="#PID模型分析：" class="headerlink" title="PID模型分析："></a>PID模型分析：</h4><p>　　PID控制器的闭环使用上图中模型的工作原理图。<br>　　首先，变量 e(t) 代表误差,即输入值 r(t) 和实际输出 y(t) 两者之差。这个误差信号 e(t) 将发送到PID控制系统，该控制器对这个误差信号同时计算导数和积分。即信号 u(t) 将等于比例控制参数乘上误差，积分控制参数 K_I 乘上误差的积分，微分控制系数 K_D 乘上误差的微分。<br>　　然后这个信号 u(t) 将被发送到受控系统，得到新输出 y(t) 将获得。这个新的输出将被送回传感器再次找到新的误差信号 e(t) 。再采用这个新的误差信号，并计算其微分及其积分。如此循环往复。</p>
+<h4 id="P，I和D控制器的属性"><a href="#P，I和D控制器的属性" class="headerlink" title="P，I和D控制器的属性"></a>P，I和D控制器的属性</h4><p>比例控制参数(Kp)加快系统的响应速度，提高系统的调节精度，但从未消除稳态误差。一个积分控制参数(Ki)将消除残差，但它可能使瞬态响应差。一个微分控制参数(Kd)将改善系统的动态性能，减少了过冲，改善瞬态响应的影响。。</p>
+<hr>
+<p><strong>传送门:</strong></p>
+<ol>
+<li><a href="http://blog.csdn.net/i7leaves/article/details/6937947" target="_blank" rel="external">PID教程</a></li>
+</ol>
+
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/05/控开发--气压计:高度计.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          飞控开发－－气压计/高度计(MS5611)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/26/git-服务器搭建.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Git 服务器搭建</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="飞控开发－PID" data-title="飞控开发 -- PID" data-url="http://blog.falleaf.com/2016/03/05/飞控开发－PID.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luoye"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 LuoYe
+        
+        <span id="busuanzi_container_site_uv">|&nbsp;您是本站第 <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 位访客</span>
+        
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten&nbsp;|&nbsp;<a href="/sitemap.xml" target="_blank">sitemap</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>

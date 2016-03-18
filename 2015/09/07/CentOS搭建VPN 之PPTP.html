@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CentOS搭建VPN 之PPTP | LuoYe&#39;blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="PPTP = Point-to-Point Tunneling Protocol
+
+实验环境：　　　　华云主机　CentOS6.X 64位 
+
+一. 准备首先检测自己的机器和网络环境是否支持.（我也不清楚这些检测方法是否真实有效）[root@VM_LuoYe ~]$ modprobe ppp-compress-18 &amp;amp;&amp;amp; echo ok  --- 打印出 OK 就表示支持 ？或者[">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS搭建VPN 之PPTP">
+<meta property="og:url" content="http://blog.falleaf.com/2015/09/07/CentOS搭建VPN 之PPTP.html">
+<meta property="og:site_name" content="LuoYe'blog">
+<meta property="og:description" content="PPTP = Point-to-Point Tunneling Protocol
+
+实验环境：　　　　华云主机　CentOS6.X 64位 
+
+一. 准备首先检测自己的机器和网络环境是否支持.（我也不清楚这些检测方法是否真实有效）[root@VM_LuoYe ~]$ modprobe ppp-compress-18 &amp;amp;&amp;amp; echo ok  --- 打印出 OK 就表示支持 ？或者[">
+<meta property="og:updated_time" content="2016-03-18T08:59:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS搭建VPN 之PPTP">
+<meta name="twitter:description" content="PPTP = Point-to-Point Tunneling Protocol
+
+实验环境：　　　　华云主机　CentOS6.X 64位 
+
+一. 准备首先检测自己的机器和网络环境是否支持.（我也不清楚这些检测方法是否真实有效）[root@VM_LuoYe ~]$ modprobe ppp-compress-18 &amp;amp;&amp;amp; echo ok  --- 打印出 OK 就表示支持 ？或者[">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+
+
+	
+	<form id="search">
+	<input type="text" class="st-search-launcher" placeholder="search..."><button><i class="fa fa-search"></i> </button>
+	</form>
+	
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','1n-7fx-Zx9q6ig4dxYeV','2.0.0');
+</script>
+
+
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+
+
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">叶子的背叛</p>
+		
+<div>
+					<section class="switch-part switch-part1">
+						<nav class="header-menu">
+							<ul>
+							
+								<li><a href="/">主页</a></li>
+					        
+								<li><a href="/archives">归档</a></li>
+					        
+							</ul>
+						</nav>
+						<nav class="header-nav">
+							<div class="social">
+								
+									<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+						        
+									<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+						        
+							</div>
+						</nav>
+					</section>
+					
+					
+					<section class="switch-part switch-part2">
+						<div class="widget tagcloud" id="js-tagcloud">
+							<a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/smt32/" style="font-size: 13.33px;">smt32</a> <a href="/tags/stm32/" style="font-size: 13.33px;">stm32</a> <a href="/tags/飞控/" style="font-size: 13.33px;">飞控</a>
+						</div>
+					</section>
+					
+					
+					
+					<section class="switch-part switch-part3">
+						<div id="js-friends">
+						
+				          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hexo.io">hexo</a>
+				        
+				        </div>
+					</section>
+					
+
+					
+					
+					<section class="switch-part switch-part4">
+					
+						<div id="js-aboutme">一只游走于IT界的半调子猿猴...</div>
+					</section>
+									
+</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">LuoYe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+			</hgroup>
+
+			
+			<p class="header-subtitle">叶子的背叛</p>
+			
+
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-CentOS搭建VPN 之PPTP" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CentOS搭建VPN 之PPTP
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
+	      
+	      <i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>&nbsp;view
+	      
+	      
+	<i class="fa fa-file-word-o"></i>1,168&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+
+	  	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+		
+<div id="toc" class="toc-article">
+	<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一-准备"><span class="toc-text">一. 准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二-安装软件包"><span class="toc-text">二. 安装软件包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三-配置-vpn-的-ip-网段"><span class="toc-text">三.  配置 vpn 的 ip 网段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四-配置-dns"><span class="toc-text">四. 配置 dns</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五-添加-client-端用户"><span class="toc-text">五. 添加 client 端用户.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#六-添加防火墙规则"><span class="toc-text">六. 添加防火墙规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#七-启动"><span class="toc-text">七. 启动</span></a></li></ol>
+</div>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><p><code>PPTP</code> = Point-to-Point Tunneling Protocol</p>
+<blockquote>
+<p>实验环境：<br>　　　　华云主机　CentOS6.X 64位 </p>
+</blockquote>
+<h4 id="一-准备"><a href="#一-准备" class="headerlink" title="一. 准备"></a>一. 准备</h4><p>首先检测自己的机器和网络环境是否支持.<em>（我也不清楚这些检测方法是否真实有效）</em><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@VM_LuoYe ~]$ modprobe ppp-compress-18 &amp;&amp; echo ok  --- 打印出 OK 就表示支持 ？</span><br><span class="line">或者</span><br><span class="line">[root@VM_LuoYe ~]$strings &apos;/usr/sbin/pppd&apos; |grep -i mppe | wc --lines   -- 打印出大于 0 的数字表示支持 ？</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h4 id="二-安装软件包"><a href="#二-安装软件包" class="headerlink" title="二. 安装软件包"></a>二. 安装软件包</h4><figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line">[root@VM_LuoYe ~]$yum install -y iptables ppp pptpd</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>1.一般 iptables 系统都会自带<br>2.pptp如果yum源中没有到网上下载rpm包安装.<br>pptp 下载地址 <a href="http://sourceforge.net/projects/pptpclient/files/" target="_blank" rel="external">http://sourceforge.net/projects/pptpclient/files/</a><br>这里提供一个版本为： <a href="http://pan.baidu.com/s/1xZbps" target="_blank" rel="external">pptpd-1.4.0-1.el6.x86_64</a></p>
+</blockquote>
+<h4 id="三-配置-vpn-的-ip-网段"><a href="#三-配置-vpn-的-ip-网段" class="headerlink" title="三.  配置 vpn 的 ip 网段"></a>三.  配置 vpn 的 ip 网段</h4><figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  /etc/pptpd.conf</span></span><br><span class="line"><span class="attribute">localip</span> <span class="number">192.168.0.1</span></span><br><span class="line">remoteip <span class="number">192.168.0.234</span>-<span class="number">238</span>,<span class="number">192.168.0.245</span></span><br></pre></td></tr></table></figure>
+<h4 id="四-配置-dns"><a href="#四-配置-dns" class="headerlink" title="四. 配置 dns"></a>四. 配置 dns</h4><figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">#  /etc/ppp/options.pptpd </span><br><span class="line">ms-dns <span class="number">8.8.8.8</span></span><br><span class="line">ms-dns <span class="number">8.8.4.4</span></span><br></pre></td></tr></table></figure>
+<h4 id="五-添加-client-端用户"><a href="#五-添加-client-端用户" class="headerlink" title="五. 添加 client 端用户."></a>五. 添加 client 端用户.</h4><p>在<code>/etc/ppp/chap-secrets</code>中添加用于client登录的用户名密码等参数.<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta"># Secrets for authentication using CHAP</span></span><br><span class="line"><span class="meta"># client  server   secret    IP addresses</span></span><br><span class="line">LuoYe     pptpd   <span class="number">123456789</span>      *</span><br></pre></td></tr></table></figure></p>
+<h4 id="六-添加防火墙规则"><a href="#六-添加防火墙规则" class="headerlink" title="六. 添加防火墙规则"></a>六. 添加防火墙规则</h4><p>开启防火墙的转发后.可以通过vpn访问网外.<br><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="comment">#开启 forward</span></span><br><span class="line">[root<span class="variable">@VM_LuoYe</span> ~]<span class="variable">$ </span>vim /etc/sysctl.conf</span><br><span class="line">net.ipv4.ip_forward = <span class="number">0</span>  <span class="comment">#  改为 1</span></span><br><span class="line"></span><br><span class="line">[root<span class="variable">@VM_LuoYe</span> ~]<span class="variable">$ </span>sysctl -p   -- 生效配置</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 nat 转发规则</span></span><br><span class="line">[root<span class="variable">@VM_LuoYe</span> ~]<span class="variable">$iptables</span> -t nat -A POSTROUTING -s <span class="number">192.168</span>.<span class="number">0</span>.<span class="number">0</span>/<span class="number">24</span> -o eth<span class="number">0</span> -j MASQUERADE </span><br><span class="line"><span class="number">192.168</span>.<span class="number">0</span>.<span class="number">0</span>/<span class="number">24</span>   --  为pptpd.conf中配置的vpn网段</span><br><span class="line">eth<span class="number">0</span>   --  pptpd 服务器连接Internet的网口</span><br><span class="line">[root<span class="variable">@VM_LuoYe</span> ~]<span class="variable">$ </span>iptables-save</span><br></pre></td></tr></table></figure></p>
+<h4 id="七-启动"><a href="#七-启动" class="headerlink" title="七. 启动"></a>七. 启动</h4><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">[root<span class="variable">@VM_LuoYe</span> ~]<span class="variable">$ </span>iptables-save</span><br><span class="line">[root<span class="variable">@VM_LuoYe</span> ~]<span class="variable">$ </span>/etc/init.d/pptpd start</span><br></pre></td></tr></table></figure>
+<p><strong><em>Enjoy it …</em></strong></p>
+<hr>
+<p>Tips:</p>
+<ol>
+<li>腾讯云主机好像是不支持pptp协议的vpn，但是用步骤一中的命令都能测试通过.官方客服也说不支持.尝试搭建好服务后，客户端连接的日志报错如下：<br><code>Nov 26 20:50:24 VM_LuoYe pptpd[22331]: CTRL: PTY read or GRE write failed (pty,gre)=(11,12)</code></li>
+<li>利用 pptp 协议搭建vpn 比较简单、易用、速度比较快。android手机、和window PC都默认支持pptp不需要三方软件.但是pptp相对来不是很安全，而且很多环境下搭建不了。</li>
+</ol>
+<div style="text-align: right;"><br>—By <strong><code>LuoYe</code></strong> <em>[QQ:291268775]</em><br>　　　  <em>2014/11/26 </em><br></div>
+
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/07/find-linux-command.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          find-linux-command
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/07/VCS - Git基本操作.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">VCS - Git基本操作</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="CentOS搭建VPN 之PPTP" data-title="CentOS搭建VPN 之PPTP" data-url="http://blog.falleaf.com/2015/09/07/CentOS搭建VPN 之PPTP.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luoye"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 LuoYe
+        
+        <span id="busuanzi_container_site_uv">|&nbsp;您是本站第 <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 位访客</span>
+        
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten&nbsp;|&nbsp;<a href="/sitemap.xml" target="_blank">sitemap</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>

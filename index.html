@@ -86,7 +86,7 @@
 					
 					<section class="switch-part switch-part2">
 						<div class="widget tagcloud" id="js-tagcloud">
-							<a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/smt32/" style="font-size: 10px;">smt32</a> <a href="/tags/stm32/" style="font-size: 10px;">stm32</a> <a href="/tags/飞控/" style="font-size: 10px;">飞控</a>
+							<a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/smt32/" style="font-size: 13.33px;">smt32</a> <a href="/tags/stm32/" style="font-size: 13.33px;">stm32</a> <a href="/tags/飞控/" style="font-size: 13.33px;">飞控</a>
 						</div>
 					</section>
 					
@@ -155,7 +155,7 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-stm32-常见问题汇总-md" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-stm32-常见问题汇总" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
     
@@ -166,7 +166,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/18/stm32-常见问题汇总-md.html">stm32 常见问题汇总.md</a>
+      <a class="article-title" href="/2016/03/18/stm32-常见问题汇总.html">stm32 常见问题汇总.md</a>
     </h1>
   
 
@@ -218,7 +218,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2016/03/18/stm32-常见问题汇总-md.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+          <a  href="/2016/03/18/stm32-常见问题汇总.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
         </p>
       
       <div class="clearfix"></div>
@@ -236,7 +236,7 @@
 
 
   
-    <article id="post-飞控开发" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-控开发--气压计:高度计" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
     
@@ -247,7 +247,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/05/飞控开发.html">飞控开发－－气压计/高度计(MS5611)</a>
+      <a class="article-title" href="/2016/03/05/控开发--气压计:高度计.html">飞控开发－－气压计/高度计(MS5611)</a>
     </h1>
   
 
@@ -322,7 +322,100 @@
 
       
         <p class="article-more-link">
-          <a  href="/2016/03/05/飞控开发.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+          <a  href="/2016/03/05/控开发--气压计:高度计.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-飞控开发－PID" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/05/飞控开发－PID.html">飞控开发 -- PID</a>
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2016-03-05</i>
+	      
+	      
+	<i class="fa fa-file-word-o"></i>2,243&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+    
+
+
+	  	
+<div class="gallery">
+  <div class="photoset"  style="text-align: center; width: 85%; margin:auto;">
+    
+      
+        <img src="/resource/fly/fly.jpg">
+      
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>PID = Proportional - Integral - Differential （比例积分微分）<br>是历史最悠久，应用最广，适应性最强的控制方法.在工控中 PID 控制算法占到 90%</p>
+</blockquote>
+<h4 id="PID-图解模型"><a href="#PID-图解模型" class="headerlink" title="PID 图解模型"></a>PID 图解模型</h4><p><img src="/resource/fly/pid.png" alt="pid"></p>
+<p>PID控制公式：</p>
+<div style = "text-align:center;"><br><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msub><mi>K</mi><mi>P</mi></msub><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>+</mo><msub><mi>K</mi><mi>I</mi></msub><msubsup><mo>∫</mo><mrow><mn>0</mn></mrow><mrow><mi>t</mi></mrow></msubsup><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo><mi>d</mi><mi>t</mi><mo>+</mo><msub><mi>K</mi><mi>D</mi></msub><mfrac><mrow><mi>d</mi><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">u(t) = K_Pe(t) + K_I \int_{0}^{t}e(t)dt + K_D\frac{de(t)}{dt} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.01em;"></span><span class="strut bottom" style="height:1.36612em;vertical-align:-0.35612em;"></span><span class="base textstyle uncramped"><span class="mord mathit">u</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.13889em;">P</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mbin">+</span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.07847em;">I</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mop"><span class="op-symbol small-op mop" style="margin-right:0.19445em;top:-0.0005599999999999772em;">∫</span><span class="vlist"><span style="top:0.35612em;margin-left:-0.19445em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathrm">0</span></span></span></span><span style="top:-0.41900000000000004em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">t</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mord mathit">d</span><span class="mord mathit">t</span><span class="mbin">+</span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.02778em;">D</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord reset-textstyle textstyle uncramped"><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.345em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit">d</span><span class="mord mathit">t</span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.485em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">d</span><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span><br></div>
+      
+    </div>
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smt32/">smt32</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/飞控/">飞控</a></li></ul>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/05/飞控开发－PID.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
         </p>
       
       <div class="clearfix"></div>
@@ -402,6 +495,80 @@
       
         <p class="article-more-link">
           <a  href="/2016/02/26/git-服务器搭建.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Linux 磁盘管理之-LVM" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/07/Linux 磁盘管理之-LVM.html">Linux 磁盘管理之-LVM</a>
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
+	      
+	      
+	<i class="fa fa-file-word-o"></i>1,999&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+    
+
+
+	  	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+        <h4 id="LVM图解"><a href="#LVM图解" class="headerlink" title="LVM图解"></a>LVM图解</h4><p><a href="http://baike.baidu.com/view/361916.htm?fr=aladdin"><code>LVM</code> = <code>Logic Volume Manager</code></a><br><code>PE</code> = <code>Physical Extent</code>  (LVM的最小操作单元，默认为4M)<br><code>PV</code> = <code>Physical Volume</code><br><code>VG</code> = <code>Volume Group</code><br><code>LV</code> = <code>Logic Volume</code><br> <br><br></p>
+      
+    </div>
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/07/Linux 磁盘管理之-LVM.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
         </p>
       
       <div class="clearfix"></div>
@@ -510,7 +677,7 @@
 
 
   
-    <article id="post-Hexo+Github 免费建博客" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-CentOS搭建VPN 之PPTP" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
     
@@ -521,7 +688,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/05/Hexo+Github 免费建博客.html">Hexo+Github 免费建博客</a>
+      <a class="article-title" href="/2015/09/07/CentOS搭建VPN 之PPTP.html">CentOS搭建VPN 之PPTP</a>
     </h1>
   
 
@@ -530,10 +697,10 @@
   
     <div class="article-meta">
       <p>
-	      <i class="fa fa-calendar"></i>2015-09-05</i>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
 	      
 	      
-	<i class="fa fa-file-word-o"></i>1,463&nbsp;word
+	<i class="fa fa-file-word-o"></i>1,168&nbsp;word
 
 	      
 
@@ -547,27 +714,15 @@
 
 
 	  	
-<div class="gallery">
-  <div class="photoset"  style="text-align: center; width: 85%; margin:auto;">
-    
-      
-        <img src="http://falleaf.oss-cn-shenzhen.aliyuncs.com/blog_source%2F2015-09%2Fhexo%2Bgithub.gif">
-      
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-	
   
     <div class="article-entry" itemprop="articleBody">
 
       
-        <blockquote>
-<p> 国际惯例：废话几句，充充字数。<br> &nbsp;&nbsp;由于由于去年买的阿里云试用 ecs 马上就要到期。托管在上面的 blog 也将到期。正考虑要不要续费，无意中了解到 hexo 静态博客引擎。抱着猎奇心态尝试了下。纯静态、原生markdown支持、易上手、搭配github page 免费搭建个人blog，并支持自定义域名 。简直一见钟情呀，有木有……。加上之前先后折腾过：chinaunix、cdsn、wordpress、Typecho等，心累啊。以后应该在 hexo 下稳定了。<br> &nbsp;&nbsp;下面就记录下这几天 hexo  的使用经历</p>
+        <p><code>PPTP</code> = Point-to-Point Tunneling Protocol</p>
+<blockquote>
+<p>实验环境：<br>　　　　华云主机　CentOS6.X 64位 </p>
 </blockquote>
+<h4 id="一-准备"><a href="#一-准备" class="headerlink" title="一. 准备"></a>一. 准备</h4><p>首先检测自己的机器和网络环境是否支持.<em>（我也不清楚这些检测方法是否真实有效）</em><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@VM_LuoYe ~]$ modprobe ppp-compress-18 &amp;&amp; echo ok  --- 打印出 OK 就表示支持 ？</span><br><span class="line">或者</span><br><span class="line">[root@VM_LuoYe ~]$strings &apos;/usr/sbin/pppd&apos; |grep -i mppe | wc --lines   -- 打印出大于 0 的数字表示支持 ？</span><br></pre></td></tr></table></figure></p>
       
     </div>
 
@@ -577,12 +732,12 @@
       
 	<div class="article-tag tagcloud">
 	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
 	</div>
 
       
         <p class="article-more-link">
-          <a  href="/2015/09/05/Hexo+Github 免费建博客.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+          <a  href="/2015/09/07/CentOS搭建VPN 之PPTP.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
         </p>
       
       <div class="clearfix"></div>
@@ -600,7 +755,7 @@
 
 
   
-    <article id="post-Hexo博客个性化" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-VCS - Git基本操作" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
     
@@ -611,7 +766,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/05/Hexo博客个性化.html">Hexo站点个性化</a>
+      <a class="article-title" href="/2015/09/07/VCS - Git基本操作.html">VCS - Git基本操作</a>
     </h1>
   
 
@@ -620,10 +775,10 @@
   
     <div class="article-meta">
       <p>
-	      <i class="fa fa-calendar"></i>2015-09-05</i>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
 	      
 	      
-	<i class="fa fa-file-word-o"></i>3,385&nbsp;word
+	<i class="fa fa-file-word-o"></i>1,488&nbsp;word
 
 	      
 
@@ -637,25 +792,11 @@
 
 
 	  	
-<div class="gallery">
-  <div class="photoset"  style="text-align: center; width: 85%; margin:auto;">
-    
-      
-        <img src="http://falleaf.oss-cn-shenzhen.aliyuncs.com/blog_source%2F2015-09%2Fhexo.png">
-      
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-	
   
     <div class="article-entry" itemprop="articleBody">
 
       
-        <h2 id="主题选择"><a href="#主题选择" class="headerlink" title="主题选择"></a>主题选择</h2><p>本站整体上使用了 Litten 的 <a href="https://github.com/litten/hexo-theme-yilia">Yilia</a> 主题。并在它的基础上做了些小小的修改。你可以到官网选择自己喜欢的主题：<a href="https://hexo.io/themes/">戳这</a>。<br>使用方法：<code>git  clone [theme_url]</code> 到目录 <code>/themes/</code>.并修改根目录下主配置文件 <strong>_config.yml</strong><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: http://hexo.io/plugins/</span><br><span class="line">## Themes: http://hexo.io/themes/</span><br><span class="line"># theme: landscape-plus</span><br><span class="line">theme: your_theme_name  # 填写你的主题名</span><br></pre></td></tr></table></figure></p>
+        <h5 id="Git-状态图："><a href="#Git-状态图：" class="headerlink" title="Git 状态图："></a>Git 状态图：</h5><p><code>VCS = Version Control System</code><br><a href="/resource/git/git-status.png">git-status</a></p>
       
     </div>
 
@@ -665,12 +806,12 @@
       
 	<div class="article-tag tagcloud">
 	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
 	</div>
 
       
         <p class="article-more-link">
-          <a  href="/2015/09/05/Hexo博客个性化.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+          <a  href="/2015/09/07/VCS - Git基本操作.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
         </p>
       
       <div class="clearfix"></div>
@@ -688,6 +829,160 @@
 
 
   
+    <article id="post-Git 进阶" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/07/Git 进阶.html">Git 进阶</a>
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
+	      
+	      
+	<i class="fa fa-file-word-o"></i>494&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+    
+
+
+	  	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+        <h4 id="Git-命令别名"><a href="#Git-命令别名" class="headerlink" title="Git 命令别名"></a>Git 命令别名</h4><figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ git config --global alias.<span class="string">[Shortcut]</span> <span class="string">[Command]</span></span><br></pre></td></tr></table></figure>
+<h4 id="Git-nix自动补全"><a href="#Git-nix自动补全" class="headerlink" title="Git *nix自动补全"></a>Git *nix自动补全</h4><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$ </span>cd ~</span><br><span class="line"></span><br><span class="line"><span class="variable">$ </span>curl <span class="symbol">https:</span>/<span class="regexp">/raw.github.com/git</span><span class="regexp">/git/master</span><span class="regexp">/contrib/completion</span><span class="regexp">/git-completion.bash -o ~/</span>.git-completion.bash</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/07/Git 进阶.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-IP网址科普" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/07/IP网址科普.html">IP网址科普</a>
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
+	      
+	      
+	<i class="fa fa-file-word-o"></i>590&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+    
+
+
+	  	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+        <h4 id="IP编址"><a href="#IP编址" class="headerlink" title="IP编址:"></a>IP编址:</h4><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">地址类型          地址空间</span><br><span class="line">  A类         Net<span class="selector-class">.Host</span><span class="selector-class">.Host</span><span class="selector-class">.Host</span></span><br><span class="line">  B类         Net<span class="selector-class">.Net</span><span class="selector-class">.Host</span><span class="selector-class">.Host</span></span><br><span class="line">  C类         Net<span class="selector-class">.Net</span><span class="selector-class">.Net</span><span class="selector-class">.Host</span></span><br><span class="line">  D类         组播</span><br><span class="line">  E类         用于科研</span><br></pre></td></tr></table></figure>
+<h4 id="私有IP"><a href="#私有IP" class="headerlink" title="私有IP:"></a>私有IP:</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">地址类型          地址空间</span><br><span class="line">  <span class="selector-tag">A</span>类         10<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span>~10<span class="selector-class">.255</span><span class="selector-class">.255</span><span class="selector-class">.255</span></span><br><span class="line">  <span class="selector-tag">B</span>类         172<span class="selector-class">.16</span><span class="selector-class">.0</span><span class="selector-class">.0</span>~172<span class="selector-class">.31</span><span class="selector-class">.255</span><span class="selector-class">.255</span></span><br><span class="line">  <span class="selector-tag">C</span>类         192<span class="selector-class">.168</span><span class="selector-class">.0</span><span class="selector-class">.0</span>~192<span class="selector-class">.762</span><span class="selector-class">.255</span><span class="selector-class">.255</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/07/IP网址科普.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">

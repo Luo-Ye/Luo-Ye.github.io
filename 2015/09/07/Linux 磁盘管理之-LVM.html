@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 磁盘管理之-LVM | LuoYe&#39;blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="LVM图解LVM = Logic Volume ManagerPE = Physical Extent  (LVM的最小操作单元，默认为4M)PV = Physical VolumeVG = Volume GroupLV = Logic Volume">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 磁盘管理之-LVM">
+<meta property="og:url" content="http://blog.falleaf.com/2015/09/07/Linux 磁盘管理之-LVM.html">
+<meta property="og:site_name" content="LuoYe'blog">
+<meta property="og:description" content="LVM图解LVM = Logic Volume ManagerPE = Physical Extent  (LVM的最小操作单元，默认为4M)PV = Physical VolumeVG = Volume GroupLV = Logic Volume">
+<meta property="og:updated_time" content="2016-03-18T09:13:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 磁盘管理之-LVM">
+<meta name="twitter:description" content="LVM图解LVM = Logic Volume ManagerPE = Physical Extent  (LVM的最小操作单元，默认为4M)PV = Physical VolumeVG = Volume GroupLV = Logic Volume">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+
+
+	
+	<form id="search">
+	<input type="text" class="st-search-launcher" placeholder="search..."><button><i class="fa fa-search"></i> </button>
+	</form>
+	
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','1n-7fx-Zx9q6ig4dxYeV','2.0.0');
+</script>
+
+
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+
+
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">叶子的背叛</p>
+		
+<div>
+					<section class="switch-part switch-part1">
+						<nav class="header-menu">
+							<ul>
+							
+								<li><a href="/">主页</a></li>
+					        
+								<li><a href="/archives">归档</a></li>
+					        
+							</ul>
+						</nav>
+						<nav class="header-nav">
+							<div class="social">
+								
+									<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+						        
+									<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+						        
+							</div>
+						</nav>
+					</section>
+					
+					
+					<section class="switch-part switch-part2">
+						<div class="widget tagcloud" id="js-tagcloud">
+							<a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/smt32/" style="font-size: 13.33px;">smt32</a> <a href="/tags/stm32/" style="font-size: 13.33px;">stm32</a> <a href="/tags/飞控/" style="font-size: 13.33px;">飞控</a>
+						</div>
+					</section>
+					
+					
+					
+					<section class="switch-part switch-part3">
+						<div id="js-friends">
+						
+				          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hexo.io">hexo</a>
+				        
+				        </div>
+					</section>
+					
+
+					
+					
+					<section class="switch-part switch-part4">
+					
+						<div id="js-aboutme">一只游走于IT界的半调子猿猴...</div>
+					</section>
+									
+</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">LuoYe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+			</hgroup>
+
+			
+			<p class="header-subtitle">叶子的背叛</p>
+			
+
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Linux 磁盘管理之-LVM" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux 磁盘管理之-LVM
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
+	      
+	      <i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>&nbsp;view
+	      
+	      
+	<i class="fa fa-file-word-o"></i>1,999&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+
+	  	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+		
+<div id="toc" class="toc-article">
+	<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#LVM图解"><span class="toc-text">LVM图解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LVM创建流程"><span class="toc-text">LVM创建流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LVM实战"><span class="toc-text">LVM实战</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#战场一：-空磁盘划分LVM，并挂载使用"><span class="toc-text">战场一： 空磁盘划分LVM，并挂载使用.</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#战场二：-逻辑卷拉伸"><span class="toc-text">战场二： 逻辑卷拉伸</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#战场三：-逻辑卷缩小"><span class="toc-text">战场三： 逻辑卷缩小</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#战场三：-卸载加入到-VG-中的-PV"><span class="toc-text">战场三： 卸载加入到 VG 中的 PV</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意事项："><span class="toc-text">注意事项：</span></a>
+</div>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><h4 id="LVM图解"><a href="#LVM图解" class="headerlink" title="LVM图解"></a>LVM图解</h4><p><a href="http://baike.baidu.com/view/361916.htm?fr=aladdin" target="_blank" rel="external"><code>LVM</code> = <code>Logic Volume Manager</code></a><br><code>PE</code> = <code>Physical Extent</code>  (LVM的最小操作单元，默认为4M)<br><code>PV</code> = <code>Physical Volume</code><br><code>VG</code> = <code>Volume Group</code><br><code>LV</code> = <code>Logic Volume</code><br> <br><br></p>
+ <a id="more"></a>
+<figure class="highlight gherkin"><table><tr><td class="code"><pre><span class="line">              +------------PV----------------+          +-------------PV---------------+                        </span><br><span class="line">/dev/sda <span class="variable">&lt;--- | ____    ____    ____    ____ |          | ____    ____    ____    ____ | ---&gt;</span> /dev/sdb         </span><br><span class="line">              |<span class="string"> </span>|<span class="string">PE</span>|<span class="string">    </span>|<span class="string">PE</span>|<span class="string">....</span>|<span class="string">PE</span>|<span class="string">    </span>|<span class="string">PE</span>|<span class="string"> </span>|<span class="string">  ....    </span>|<span class="string"> </span>|<span class="string">PE</span>|<span class="string">    </span>|<span class="string">PE</span>|<span class="string">....</span>|<span class="string">PE</span>|<span class="string">    </span>|<span class="string">PE</span>|<span class="string"> </span>|<span class="string">                              </span><br><span class="line">              +------------------------------+          +------------------------------+        </span><br><span class="line">                          </span>|<span class="string">                                               </span>|<span class="string">    </span><br><span class="line">                          </span>|<span class="string">                                               </span>|<span class="string">        </span><br><span class="line">                         \_/                                             \_/        </span><br><span class="line">                  +---------------------------VG----------------------------+    </span><br><span class="line">                  </span>|<span class="string"> ____    ____    ____    ____ .....  ____   ____   ____  </span>|<span class="string">     </span><br><span class="line">                  </span>|<span class="string"> </span>|<span class="string">PE</span>|<span class="string">    </span>|<span class="string">PE</span>|<span class="string">    </span>|<span class="string">PE</span>|<span class="string">    </span>|<span class="string">PE</span>|<span class="string"> .....  </span>|<span class="string">PE</span>|<span class="string">   </span>|<span class="string">PE</span>|<span class="string">   </span>|<span class="string">PE</span>|<span class="string">  </span>|<span class="string">     </span><br><span class="line">                  +---------------------------------------------------------+            </span><br><span class="line">                          </span>|<span class="string">                    </span>|<span class="string">                    </span>|<span class="string">                            </span><br><span class="line">                          </span>|<span class="string">                    </span>|<span class="string">                    </span>|<span class="string">                            </span><br><span class="line">                         \_/                  \_/                  \_/                </span><br><span class="line">                   +------LV1-----+    +------LV2-----+    +------LV3-----+</span><br><span class="line">                   </span>|<span class="string"> ____    ____ </span>|<span class="string">    </span>|<span class="string"> ____    ____ </span>|<span class="string">    </span>|<span class="string"> ____    ____ </span>|</span><br><span class="line">                   |<span class="string"> </span>|<span class="string">PE</span>|<span class="string"> .. </span>|<span class="string">PE</span>|<span class="string"> </span>|<span class="string">    </span>|<span class="string"> </span>|<span class="string">PE</span>|<span class="string"> .. </span>|<span class="string">PE</span>|<span class="string"> </span>|<span class="string">    </span>|<span class="string"> </span>|<span class="string">PE</span>|<span class="string"> .. </span>|<span class="string">PE</span>|<span class="string"> </span>|</span><br><span class="line">                   +--------------+    +--------------+    +--------------+</span><br></pre></td></tr></table></figure>
+<h4 id="LVM创建流程"><a href="#LVM创建流程" class="headerlink" title="LVM创建流程"></a>LVM创建流程</h4><p>从上面的图解中，我们可以三步创建出 LV：<br><figure class="highlight brainfuck"><table><tr><td class="code"><pre><span class="line"><span class="comment">1</span><span class="string">.</span><span class="comment">把磁盘初始化为PV</span>    <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;   <span class="comment">2</span><span class="string">.</span><span class="comment">基于PV创建VG</span>   <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;   <span class="comment">3</span><span class="string">.</span><span class="comment">在VG内划分LV</span></span><br></pre></td></tr></table></figure></p>
+<p>创建出LV后即作为系统可用的逻辑磁盘，但是必须在上面创建文件系统后才可以挂载使用。<br><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line"><span class="number">4.</span>在LV上创建文件系统   <span class="comment">---&gt;   5. 挂载/使用</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="LVM实战"><a href="#LVM实战" class="headerlink" title="LVM实战"></a>LVM实战</h4><h6 id="战场一：-空磁盘划分LVM，并挂载使用"><a href="#战场一：-空磁盘划分LVM，并挂载使用" class="headerlink" title="战场一： 空磁盘划分LVM，并挂载使用."></a>战场一： 空磁盘划分LVM，并挂载使用.</h6><figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="meta">#fdisk　-l　--- 查看磁盘信息  </span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> <span class="meta">#pvcreate /dev/sdb　/dev/sdc　　---　初始化磁盘为物理卷  </span></span><br><span class="line">   <span class="meta">#pvdisplay</span></span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> <span class="meta">#vgcreate　vg_name　/dev/sdb　/dev/sdc　--- 把物理卷中的 PE 添加至卷组中</span></span><br><span class="line">   <span class="meta">#vgdisplay</span></span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> <span class="meta">#lvcreate　-n　lv_name　-L　4G　vg_name　---　从 VG 取出所需的 PE 创建 LV,创建好的 LV 将在 /dev/vg_name/lv_name 中.或者使用 -l 指定 PE 数量</span></span><br><span class="line">   <span class="meta">#lvdisplay</span></span><br><span class="line"></span><br><span class="line"><span class="number">5.</span> <span class="meta">#mkfs.ext4　/dev/vg_name/lv_name　---　在 LV 上创建文件系统</span></span><br><span class="line"></span><br><span class="line"><span class="number">6.</span> <span class="meta">#mount　/dev/vg_name/lv_name　/mount_point　--- 挂载 LV 就可以使用了</span></span><br><span class="line"></span><br><span class="line"><span class="number">7.</span> <span class="meta"># vim /etc/fstab   -- 添加如下，设置开机自动挂载</span></span><br><span class="line">  <span class="meta-keyword">/dev/</span>vg_name/lv_name    /mount_point ext4    defaults    <span class="number">0</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h6 id="战场二：-逻辑卷拉伸"><a href="#战场二：-逻辑卷拉伸" class="headerlink" title="战场二： 逻辑卷拉伸"></a>战场二： 逻辑卷拉伸</h6><p><strong>拉伸逻辑卷前，首先要确保 VG 中剩余足够多的PE.</strong>,如果 VG 有足够的PE ，则不需要重新创建PV来拉伸VG.</p>
+<p>① 首先拉伸卷组：</p>
+<ol>
+<li><p>准备好新磁盘，并格式化为 PV,为拉伸卷组提供PE</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#pvcreate</span>　/dev/sdd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把新创建的 PV 并入 VG</p>
+</li>
+</ol>
+<figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">#vgextend　vg_name　/dev/sdd</span></span><br><span class="line"><span class="meta">#vgdisplay</span></span><br></pre></td></tr></table></figure>
+<p>② 再扩容 LV<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">#lvextend -L  +10G  /dev/vg_name/lv_name</span></span><br><span class="line"><span class="meta">#lvdisplay</span></span><br></pre></td></tr></table></figure></p>
+<p>③ 最后更新文件系统.<em>(文件系统可能不能自动识别 扩容的LV,需要手动更新)</em><br><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#resize2fs</span>  /dev/vg_name/lv_name</span><br></pre></td></tr></table></figure></p>
+<h6 id="战场三：-逻辑卷缩小"><a href="#战场三：-逻辑卷缩小" class="headerlink" title="战场三： 逻辑卷缩小"></a>战场三： 逻辑卷缩小</h6><p><strong>逻辑卷的缩小必须严格按照步骤来，否则将损坏数据.</strong></p>
+<ol>
+<li><p>首先卸载挂载的 LV</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#umount</span>  /dev/vg_name/lv_name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后缩小文件系统</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#resize2fs</span>  /dev/vg_name/lv_name  <span class="number">5</span>G</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后才缩小 LV</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#lvreduce</span> -L -<span class="number">5</span> /dev/vg_name/lv_name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重新挂载 LV 使用</p>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">#mount  <span class="regexp">/dev/</span>vg_name<span class="regexp">/lv_name  /m</span>ount_point</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h6 id="战场三：-卸载加入到-VG-中的-PV"><a href="#战场三：-卸载加入到-VG-中的-PV" class="headerlink" title="战场三： 卸载加入到 VG 中的 PV"></a>战场三： 卸载加入到 VG 中的 PV</h6><p>同缩小逻辑卷一样，需要注意：确保整个系统所剩空间充足. 避免数据的损坏<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">##pvmove /dev/sdd /dev/sdb    --- 将sdd中的数据传到sdb中</span></span><br><span class="line"><span class="meta">#vgreduce  vg_name  /dev/sdd    --- 把sdd从 vg 中移除</span></span><br><span class="line"><span class="meta">#vgdisplay</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><ol>
+<li>使用 fdisk 工具格式化过的硬盘分区不能创建 LVM</li>
+<li>除非必要,尽量不要缩小 LVM 相关单元.操作过程中一定要注意系统磁盘剩余空间</li>
+<li>此外使用　<code>pvs</code>　<code>vgs</code>　<code>lvs</code>　可以查看 LVM 简要的信息 <div style="text-align: right;"><br>—By <strong><code>LuoYe</code></strong> <em>[QQ:291268775]</em><br>　　　<em>2014/10/23</em><br></div></li>
+</ol>
+
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/26/git-服务器搭建.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Git 服务器搭建
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/07/find-linux-command.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">find-linux-command</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Linux 磁盘管理之-LVM" data-title="Linux 磁盘管理之-LVM" data-url="http://blog.falleaf.com/2015/09/07/Linux 磁盘管理之-LVM.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luoye"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 LuoYe
+        
+        <span id="busuanzi_container_site_uv">|&nbsp;您是本站第 <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 位访客</span>
+        
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten&nbsp;|&nbsp;<a href="/sitemap.xml" target="_blank">sitemap</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -3,17 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: Linux | LuoYe&#39;blog</title>
+  <title>STM32 I2C 驱动 | LuoYe&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="叶子的背叛是风的的追求，还是树的不挽留....">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LuoYe'blog">
-<meta property="og:url" content="http://blog.falleaf.com/tags/Linux/index.html">
+  <meta name="description" content="写模式：检测总线 —&amp;gt; 发送 起始信号 —&amp;gt; 发送 从器件地址 + 写模式  —&amp;gt; 发送 从器件寄存器地址  —&amp;gt;  发送 数据
+读模式：检测总线 —&amp;gt; 发送 起始信号 —&amp;gt; 发送 从器件地址 + 写模式  —&amp;gt; 发送 从器件寄存器地址   —&amp;gt;  再次发送 起始信号   —&amp;gt; 再次发送 从器件地址 + 读模式  —&amp;gt;  读取 数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32 I2C 驱动">
+<meta property="og:url" content="http://blog.falleaf.com/2015/09/07/STM32 I2C 驱动.html">
 <meta property="og:site_name" content="LuoYe'blog">
-<meta property="og:description" content="叶子的背叛是风的的追求，还是树的不挽留....">
+<meta property="og:description" content="写模式：检测总线 —&amp;gt; 发送 起始信号 —&amp;gt; 发送 从器件地址 + 写模式  —&amp;gt; 发送 从器件寄存器地址  —&amp;gt;  发送 数据
+读模式：检测总线 —&amp;gt; 发送 起始信号 —&amp;gt; 发送 从器件地址 + 写模式  —&amp;gt; 发送 从器件寄存器地址   —&amp;gt;  再次发送 起始信号   —&amp;gt; 再次发送 从器件地址 + 读模式  —&amp;gt;  读取 数据">
+<meta property="og:updated_time" content="2016-03-18T09:20:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LuoYe'blog">
-<meta name="twitter:description" content="叶子的背叛是风的的追求，还是树的不挽留....">
+<meta name="twitter:title" content="STM32 I2C 驱动">
+<meta name="twitter:description" content="写模式：检测总线 —&amp;gt; 发送 起始信号 —&amp;gt; 发送 从器件地址 + 写模式  —&amp;gt; 发送 从器件寄存器地址  —&amp;gt;  发送 数据
+读模式：检测总线 —&amp;gt; 发送 起始信号 —&amp;gt; 发送 从器件地址 + 写模式  —&amp;gt; 发送 从器件寄存器地址   —&amp;gt;  再次发送 起始信号   —&amp;gt; 再次发送 从器件地址 + 读模式  —&amp;gt;  读取 数据">
   
   
     <link rel="icon" href="/favicon.png">
@@ -153,202 +157,117 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-  
+      <div class="body-wrap"><article id="post-STM32 I2C 驱动" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      STM32 I2C 驱动
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
+	      
+	      <i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>&nbsp;view
+	      
+	      
+	<i class="fa fa-file-word-o"></i>174&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
       
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stm32/">stm32</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<i class="fa fa-calendar"></i>9月 7</i>
-        </div>
-    	 
+
+
+	  	
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/07/find-linux-command.html">find-linux-command</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-	</div>
+      
+		
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><h4 id="写模式："><a href="#写模式：" class="headerlink" title="写模式："></a>写模式：</h4><p>检测总线 —&gt; 发送 <code>起始信号</code> —&gt; 发送 <code>从器件地址</code> + <code>写模式</code>  —&gt; 发送 <code>从器件寄存器地址</code>  —&gt;  发送 <code>数据</code></p>
+<h4 id="读模式："><a href="#读模式：" class="headerlink" title="读模式："></a>读模式：</h4><p>检测总线 —&gt; 发送 <code>起始信号</code> —&gt; 发送 <code>从器件地址</code> + <code>写模式</code>  —&gt; 发送 <code>从器件寄存器地址</code>   —&gt;  再次发送 <code>起始信号</code>   —&gt; 再次发送 <code>从器件地址</code> + <code>读模式</code>  —&gt;  读取 <code>数据</code></p>
 
-          
+      
+    </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/07/IP网址科普.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          IP网址科普
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/07/linux - man.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">linux - man</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<i class="fa fa-calendar"></i>9月 7</i>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/07/CentOS搭建VPN 之PPTP.html">CentOS搭建VPN 之PPTP</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<i class="fa fa-calendar"></i>9月 7</i>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/07/Linux 磁盘管理之-LVM.html">Linux 磁盘管理之-LVM</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-	</div>
 
-          
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="STM32 I2C 驱动" data-title="STM32 I2C 驱动" data-url="http://blog.falleaf.com/2015/09/07/STM32 I2C 驱动.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luoye"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<i class="fa fa-calendar"></i>9月 7</i>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/07/IP网址科普.html">IP网址科普</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<i class="fa fa-calendar"></i>9月 7</i>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/07/linux - man.html">linux - man</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<i class="fa fa-calendar"></i>9月 7</i>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/07/ 高效 Linux.html">高效 Linux</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 </div>
       <footer id="footer">
@@ -377,9 +296,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false
 	}
