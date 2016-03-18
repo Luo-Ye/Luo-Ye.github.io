@@ -236,6 +236,99 @@
 
 
   
+    <article id="post-飞控开发－PID" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/05/飞控开发－PID.html">飞控开发 -- PID</a>
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2016-03-05</i>
+	      
+	      
+	<i class="fa fa-file-word-o"></i>2,243&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+    
+
+
+	  	
+<div class="gallery">
+  <div class="photoset"  style="text-align: center; width: 85%; margin:auto;">
+    
+      
+        <img src="/resource/fly/fly.jpg">
+      
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>PID = Proportional - Integral - Differential （比例积分微分）<br>是历史最悠久，应用最广，适应性最强的控制方法.在工控中 PID 控制算法占到 90%</p>
+</blockquote>
+<h4 id="PID-图解模型"><a href="#PID-图解模型" class="headerlink" title="PID 图解模型"></a>PID 图解模型</h4><p><img src="/resource/fly/pid.png" alt="pid"></p>
+<p>PID控制公式：</p>
+<div style = "text-align:center;"><br><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msub><mi>K</mi><mi>P</mi></msub><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>+</mo><msub><mi>K</mi><mi>I</mi></msub><msubsup><mo>∫</mo><mrow><mn>0</mn></mrow><mrow><mi>t</mi></mrow></msubsup><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo><mi>d</mi><mi>t</mi><mo>+</mo><msub><mi>K</mi><mi>D</mi></msub><mfrac><mrow><mi>d</mi><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">u(t) = K_Pe(t) + K_I \int_{0}^{t}e(t)dt + K_D\frac{de(t)}{dt} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.01em;"></span><span class="strut bottom" style="height:1.36612em;vertical-align:-0.35612em;"></span><span class="base textstyle uncramped"><span class="mord mathit">u</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.13889em;">P</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mbin">+</span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.07847em;">I</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mop"><span class="op-symbol small-op mop" style="margin-right:0.19445em;top:-0.0005599999999999772em;">∫</span><span class="vlist"><span style="top:0.35612em;margin-left:-0.19445em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathrm">0</span></span></span></span><span style="top:-0.41900000000000004em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">t</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mord mathit">d</span><span class="mord mathit">t</span><span class="mbin">+</span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.02778em;">D</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord reset-textstyle textstyle uncramped"><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.345em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit">d</span><span class="mord mathit">t</span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.485em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">d</span><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span><br></div>
+      
+    </div>
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smt32/">smt32</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/飞控/">飞控</a></li></ul>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/05/飞控开发－PID.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-控开发--气压计:高度计" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -340,99 +433,6 @@
 
 
   
-    <article id="post-飞控开发－PID" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/05/飞控开发－PID.html">飞控开发 -- PID</a>
-    </h1>
-  
-
-      </header>
-
-  
-    <div class="article-meta">
-      <p>
-	      <i class="fa fa-calendar"></i>2016-03-05</i>
-	      
-	      
-	<i class="fa fa-file-word-o"></i>2,243&nbsp;word
-
-	      
-
-
-	      </p>
-    </div>
-    
-
-      
-    
-
-
-	  	
-<div class="gallery">
-  <div class="photoset"  style="text-align: center; width: 85%; margin:auto;">
-    
-      
-        <img src="/resource/fly/fly.jpg">
-      
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-	
-  
-    <div class="article-entry" itemprop="articleBody">
-
-      
-        <blockquote>
-<p>PID = Proportional - Integral - Differential （比例积分微分）<br>是历史最悠久，应用最广，适应性最强的控制方法.在工控中 PID 控制算法占到 90%</p>
-</blockquote>
-<h4 id="PID-图解模型"><a href="#PID-图解模型" class="headerlink" title="PID 图解模型"></a>PID 图解模型</h4><p><img src="/resource/fly/pid.png" alt="pid"></p>
-<p>PID控制公式：</p>
-<div style = "text-align:center;"><br><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msub><mi>K</mi><mi>P</mi></msub><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>+</mo><msub><mi>K</mi><mi>I</mi></msub><msubsup><mo>∫</mo><mrow><mn>0</mn></mrow><mrow><mi>t</mi></mrow></msubsup><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo><mi>d</mi><mi>t</mi><mo>+</mo><msub><mi>K</mi><mi>D</mi></msub><mfrac><mrow><mi>d</mi><mi>e</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">u(t) = K_Pe(t) + K_I \int_{0}^{t}e(t)dt + K_D\frac{de(t)}{dt} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.01em;"></span><span class="strut bottom" style="height:1.36612em;vertical-align:-0.35612em;"></span><span class="base textstyle uncramped"><span class="mord mathit">u</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.13889em;">P</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mbin">+</span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.07847em;">I</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mop"><span class="op-symbol small-op mop" style="margin-right:0.19445em;top:-0.0005599999999999772em;">∫</span><span class="vlist"><span style="top:0.35612em;margin-left:-0.19445em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathrm">0</span></span></span></span><span style="top:-0.41900000000000004em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">t</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span><span class="mord mathit">d</span><span class="mord mathit">t</span><span class="mbin">+</span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.02778em;">D</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord reset-textstyle textstyle uncramped"><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.345em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit">d</span><span class="mord mathit">t</span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.485em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">d</span><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit">t</span><span class="mclose">)</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span><br></div>
-      
-    </div>
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smt32/">smt32</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/飞控/">飞控</a></li></ul>
-	</div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/03/05/飞控开发－PID.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-  
     <article id="post-git-服务器搭建" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -512,6 +512,158 @@
 
 
   
+    <article id="post- 高效 Linux" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/07/ 高效 Linux.html">高效 Linux</a>
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
+	      
+	      
+	<i class="fa fa-file-word-o"></i>441&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+    
+
+
+	  	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+        <h3 id="Linux基础加油站"><a href="#Linux基础加油站" class="headerlink" title="Linux基础加油站"></a>Linux基础加油站</h3><blockquote>
+<h5 id="摘要"><a href="#摘要" class="headerlink" title="摘要:"></a>摘要:</h5><p>鉴于命令行的简洁，高效，它成为linux技术人员必须熟练掌握的技能之一.所以在此分享一些Linux命令行下常见并实用的技巧，同时也作为自己的学习笔记.</p>
+</blockquote>
+<h5 id="1-Linux-命令行提示字符串着色"><a href="#1-Linux-命令行提示字符串着色" class="headerlink" title="1. Linux 命令行提示字符串着色"></a>1. Linux 命令行提示字符串着色</h5><p><strong>情景</strong>: 提示符着色，可以使我们在繁多的输出中区分开各个命令的输出结果.linux中环境变量 <code>PS1</code> 代表着命令提示符的属性，默认为：<code>\u@\h: \w\$</code></p>
+      
+    </div>
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/07/ 高效 Linux.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-IP网址科普" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/07/IP网址科普.html">IP网址科普</a>
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
+	      
+	      
+	<i class="fa fa-file-word-o"></i>590&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+    
+
+
+	  	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+        <h4 id="IP编址"><a href="#IP编址" class="headerlink" title="IP编址:"></a>IP编址:</h4><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">地址类型          地址空间</span><br><span class="line">  A类         Net<span class="selector-class">.Host</span><span class="selector-class">.Host</span><span class="selector-class">.Host</span></span><br><span class="line">  B类         Net<span class="selector-class">.Net</span><span class="selector-class">.Host</span><span class="selector-class">.Host</span></span><br><span class="line">  C类         Net<span class="selector-class">.Net</span><span class="selector-class">.Net</span><span class="selector-class">.Host</span></span><br><span class="line">  D类         组播</span><br><span class="line">  E类         用于科研</span><br></pre></td></tr></table></figure>
+<h4 id="私有IP"><a href="#私有IP" class="headerlink" title="私有IP:"></a>私有IP:</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">地址类型          地址空间</span><br><span class="line">  <span class="selector-tag">A</span>类         10<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span>~10<span class="selector-class">.255</span><span class="selector-class">.255</span><span class="selector-class">.255</span></span><br><span class="line">  <span class="selector-tag">B</span>类         172<span class="selector-class">.16</span><span class="selector-class">.0</span><span class="selector-class">.0</span>~172<span class="selector-class">.31</span><span class="selector-class">.255</span><span class="selector-class">.255</span></span><br><span class="line">  <span class="selector-tag">C</span>类         192<span class="selector-class">.168</span><span class="selector-class">.0</span><span class="selector-class">.0</span>~192<span class="selector-class">.762</span><span class="selector-class">.255</span><span class="selector-class">.255</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/07/IP网址科普.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Linux 磁盘管理之-LVM" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -569,97 +721,6 @@
       
         <p class="article-more-link">
           <a  href="/2015/09/07/Linux 磁盘管理之-LVM.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-find-linux-command" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/07/find-linux-command.html">find-linux-command</a>
-    </h1>
-  
-
-      </header>
-
-  
-    <div class="article-meta">
-      <p>
-	      <i class="fa fa-calendar"></i>2015-09-07</i>
-	      
-	      
-	<i class="fa fa-file-word-o"></i>1,186&nbsp;word
-
-	      
-
-
-	      </p>
-    </div>
-    
-
-      
-    
-
-
-	  	
-<div class="gallery">
-  <div class="photoset"  style="text-align: center; width: 85%; margin:auto;">
-    
-      
-        <img src="http://falleaf.oss-cn-shenzhen.aliyuncs.com/blog_source%2F2015-09%2Flinux-command.jpg">
-      
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-	
-  
-    <div class="article-entry" itemprop="articleBody">
-
-      
-        <blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;Linux下find命令在目录结构中搜索文件，并执行指定的操作。Linux下find命令提供了相当多的查找条件，功能很强大.在运行一个非常消耗资源的find命令时，很多人都倾向于把它放在后台执行，因为遍历一个大的文件系统可能会花费很长的时间(这里是指30G字节以上的文件系统)</p>
-</blockquote>
-<h3 id="命令格式："><a href="#命令格式：" class="headerlink" title="命令格式："></a>命令格式：</h3><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ <span class="keyword">find</span> pathname -<span class="keyword">options</span> [-<span class="keyword">print</span> -exec -ok ...]</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-	</div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/07/find-linux-command.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
         </p>
       
       <div class="clearfix"></div>
@@ -829,7 +890,7 @@
 
 
   
-    <article id="post-Git 进阶" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-find-linux-command" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
     
@@ -840,7 +901,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/07/Git 进阶.html">Git 进阶</a>
+      <a class="article-title" href="/2015/09/07/find-linux-command.html">find-linux-command</a>
     </h1>
   
 
@@ -852,7 +913,7 @@
 	      <i class="fa fa-calendar"></i>2015-09-07</i>
 	      
 	      
-	<i class="fa fa-file-word-o"></i>494&nbsp;word
+	<i class="fa fa-file-word-o"></i>1,186&nbsp;word
 
 	      
 
@@ -866,87 +927,28 @@
 
 
 	  	
-  
-    <div class="article-entry" itemprop="articleBody">
-
-      
-        <h4 id="Git-命令别名"><a href="#Git-命令别名" class="headerlink" title="Git 命令别名"></a>Git 命令别名</h4><figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ git config --global alias.<span class="string">[Shortcut]</span> <span class="string">[Command]</span></span><br></pre></td></tr></table></figure>
-<h4 id="Git-nix自动补全"><a href="#Git-nix自动补全" class="headerlink" title="Git *nix自动补全"></a>Git *nix自动补全</h4><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$ </span>cd ~</span><br><span class="line"></span><br><span class="line"><span class="variable">$ </span>curl <span class="symbol">https:</span>/<span class="regexp">/raw.github.com/git</span><span class="regexp">/git/master</span><span class="regexp">/contrib/completion</span><span class="regexp">/git-completion.bash -o ~/</span>.git-completion.bash</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
+<div class="gallery">
+  <div class="photoset"  style="text-align: center; width: 85%; margin:auto;">
     
-    <div class="article-info article-info-index">
       
+        <img src="http://falleaf.oss-cn-shenzhen.aliyuncs.com/blog_source%2F2015-09%2Flinux-command.jpg">
       
-	<div class="article-tag tagcloud">
-	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-	</div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/07/Git 进阶.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
     
   </div>
-  
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-IP网址科普" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/07/IP网址科普.html">IP网址科普</a>
-    </h1>
-  
-
-      </header>
-
-  
-    <div class="article-meta">
-      <p>
-	      <i class="fa fa-calendar"></i>2015-09-07</i>
-	      
-	      
-	<i class="fa fa-file-word-o"></i>590&nbsp;word
-
-	      
-
-
-	      </p>
-    </div>
-    
-
-      
-    
-
-
-	  	
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+	
   
     <div class="article-entry" itemprop="articleBody">
 
       
-        <h4 id="IP编址"><a href="#IP编址" class="headerlink" title="IP编址:"></a>IP编址:</h4><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">地址类型          地址空间</span><br><span class="line">  A类         Net<span class="selector-class">.Host</span><span class="selector-class">.Host</span><span class="selector-class">.Host</span></span><br><span class="line">  B类         Net<span class="selector-class">.Net</span><span class="selector-class">.Host</span><span class="selector-class">.Host</span></span><br><span class="line">  C类         Net<span class="selector-class">.Net</span><span class="selector-class">.Net</span><span class="selector-class">.Host</span></span><br><span class="line">  D类         组播</span><br><span class="line">  E类         用于科研</span><br></pre></td></tr></table></figure>
-<h4 id="私有IP"><a href="#私有IP" class="headerlink" title="私有IP:"></a>私有IP:</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">地址类型          地址空间</span><br><span class="line">  <span class="selector-tag">A</span>类         10<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span>~10<span class="selector-class">.255</span><span class="selector-class">.255</span><span class="selector-class">.255</span></span><br><span class="line">  <span class="selector-tag">B</span>类         172<span class="selector-class">.16</span><span class="selector-class">.0</span><span class="selector-class">.0</span>~172<span class="selector-class">.31</span><span class="selector-class">.255</span><span class="selector-class">.255</span></span><br><span class="line">  <span class="selector-tag">C</span>类         192<span class="selector-class">.168</span><span class="selector-class">.0</span><span class="selector-class">.0</span>~192<span class="selector-class">.762</span><span class="selector-class">.255</span><span class="selector-class">.255</span></span><br></pre></td></tr></table></figure>
+        <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Linux下find命令在目录结构中搜索文件，并执行指定的操作。Linux下find命令提供了相当多的查找条件，功能很强大.在运行一个非常消耗资源的find命令时，很多人都倾向于把它放在后台执行，因为遍历一个大的文件系统可能会花费很长的时间(这里是指30G字节以上的文件系统)</p>
+</blockquote>
+<h3 id="命令格式："><a href="#命令格式：" class="headerlink" title="命令格式："></a>命令格式：</h3><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ <span class="keyword">find</span> pathname -<span class="keyword">options</span> [-<span class="keyword">print</span> -exec -ok ...]</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -961,7 +963,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2015/09/07/IP网址科普.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+          <a  href="/2015/09/07/find-linux-command.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
         </p>
       
       <div class="clearfix"></div>

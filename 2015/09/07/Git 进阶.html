@@ -13,11 +13,13 @@ Git *nix自动补全$ cd ~$ curl https://raw.github.com/git/git/master/contrib/c
 <meta property="og:site_name" content="LuoYe'blog">
 <meta property="og:description" content="Git 命令别名$ git config --global alias.[Shortcut] [Command]
 Git *nix自动补全$ cd ~$ curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash">
-<meta property="og:updated_time" content="2016-03-18T09:41:22.000Z">
+<meta property="og:image" content="http://blog.falleaf.com/resource/git/git_mode.png">
+<meta property="og:updated_time" content="2016-03-18T09:45:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git 进阶">
 <meta name="twitter:description" content="Git 命令别名$ git config --global alias.[Shortcut] [Command]
 Git *nix自动补全$ cd ~$ curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash">
+<meta name="twitter:image" content="http://blog.falleaf.com/resource/git/git_mode.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -182,7 +184,7 @@ Git *nix自动补全$ cd ~$ curl https://raw.github.com/git/git/master/contrib/c
 	      <i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>&nbsp;view
 	      
 	      
-	<i class="fa fa-file-word-o"></i>494&nbsp;word
+	<i class="fa fa-file-word-o"></i>711&nbsp;word
 
 	      
 
@@ -211,6 +213,11 @@ Git *nix自动补全$ cd ~$ curl https://raw.github.com/git/git/master/contrib/c
 
       
 		
+<div id="toc" class="toc-article">
+	<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-命令别名"><span class="toc-text">Git 命令别名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-nix自动补全"><span class="toc-text">Git *nix自动补全</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-分支"><span class="toc-text">Git 分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分支策略"><span class="toc-text">分支策略</span></a></li></ol>
+</div>
+
+
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><h4 id="Git-命令别名"><a href="#Git-命令别名" class="headerlink" title="Git 命令别名"></a>Git 命令别名</h4><figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ git config --global alias.<span class="string">[Shortcut]</span> <span class="string">[Command]</span></span><br></pre></td></tr></table></figure>
 <h4 id="Git-nix自动补全"><a href="#Git-nix自动补全" class="headerlink" title="Git *nix自动补全"></a>Git *nix自动补全</h4><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$ </span>cd ~</span><br><span class="line"></span><br><span class="line"><span class="variable">$ </span>curl <span class="symbol">https:</span>/<span class="regexp">/raw.github.com/git</span><span class="regexp">/git/master</span><span class="regexp">/contrib/completion</span><span class="regexp">/git-completion.bash -o ~/</span>.git-completion.bash</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -237,6 +244,11 @@ Git *nix自动补全$ cd ~$ curl https://raw.github.com/git/git/master/contrib/c
 <li>删除 branch </li>
 </ul>
 <figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ git branch -d Branch-<span class="built_in">name</span></span><br></pre></td></tr></table></figure>
+<h4 id="分支策略"><a href="#分支策略" class="headerlink" title="分支策略"></a>分支策略</h4><p>在实际开发中，我们应该按照几个基本原则进行分支管理：</p>
+<ul>
+<li>首先，<code>master</code> 分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；那在哪干活呢？干活都在<code>dev</code>分支上，也就是说，dev 分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到 master 上，在 master 分支发布1.0版本；你和你的小伙伴们每个人都在 dev 分支上干活，每个人都有自己的分支，时不时地往 dev 分支上合并就可以了。</li>
+<li>所以，团队合作的分支看起来就像这样<br><img src="/resource/git/git_mode.png" alt="git_mode"></li>
+</ul>
 <hr>
 <p>未完待续…</p>
 
@@ -249,18 +261,18 @@ Git *nix自动补全$ cd ~$ curl https://raw.github.com/git/git/master/contrib/c
     
 <nav id="article-nav">
   
-    <a href="/2015/09/07/VCS - Git基本操作.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/09/07/linux - man.html" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          VCS - Git基本操作
+          linux - man
         
       </div>
     </a>
   
   
-    <a href="/2015/09/07/IP网址科普.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">IP网址科普</div>
+    <a href="/2015/09/07/STM32 I2C 驱动.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">STM32 I2C 驱动</div>
       <strong class="article-nav-caption">></strong>
     </a>
   

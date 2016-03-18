@@ -155,79 +155,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-STM32 I2C 驱动" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/07/STM32 I2C 驱动.html">STM32 I2C 驱动</a>
-    </h1>
-  
-
-      </header>
-
-  
-    <div class="article-meta">
-      <p>
-	      <i class="fa fa-calendar"></i>2015-09-07</i>
-	      
-	      
-	<i class="fa fa-file-word-o"></i>174&nbsp;word
-
-	      
-
-
-	      </p>
-    </div>
-    
-
-      
-    
-
-
-	  	
-  
-    <div class="article-entry" itemprop="articleBody">
-
-      
-		
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><h4 id="写模式："><a href="#写模式：" class="headerlink" title="写模式："></a>写模式：</h4><p>检测总线 —&gt; 发送 <code>起始信号</code> —&gt; 发送 <code>从器件地址</code> + <code>写模式</code>  —&gt; 发送 <code>从器件寄存器地址</code>  —&gt;  发送 <code>数据</code></p>
-<h4 id="读模式："><a href="#读模式：" class="headerlink" title="读模式："></a>读模式：</h4><p>检测总线 —&gt; 发送 <code>起始信号</code> —&gt; 发送 <code>从器件地址</code> + <code>写模式</code>  —&gt; 发送 <code>从器件寄存器地址</code>   —&gt;  再次发送 <code>起始信号</code>   —&gt; 再次发送 <code>从器件地址</code> + <code>读模式</code>  —&gt;  读取 <code>数据</code></p>
-
-      
-    </div>
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stm32/">stm32</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-  
     <article id="post-linux - man" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -318,7 +245,7 @@
 
 
   
-    <article id="post- 高效 Linux" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Git 进阶" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
     
@@ -329,7 +256,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/07/ 高效 Linux.html">高效 Linux</a>
+      <a class="article-title" href="/2015/09/07/Git 进阶.html">Git 进阶</a>
     </h1>
   
 
@@ -341,7 +268,7 @@
 	      <i class="fa fa-calendar"></i>2015-09-07</i>
 	      
 	      
-	<i class="fa fa-file-word-o"></i>441&nbsp;word
+	<i class="fa fa-file-word-o"></i>711&nbsp;word
 
 	      
 
@@ -359,10 +286,8 @@
     <div class="article-entry" itemprop="articleBody">
 
       
-        <h3 id="Linux基础加油站"><a href="#Linux基础加油站" class="headerlink" title="Linux基础加油站"></a>Linux基础加油站</h3><blockquote>
-<h5 id="摘要"><a href="#摘要" class="headerlink" title="摘要:"></a>摘要:</h5><p>鉴于命令行的简洁，高效，它成为linux技术人员必须熟练掌握的技能之一.所以在此分享一些Linux命令行下常见并实用的技巧，同时也作为自己的学习笔记.</p>
-</blockquote>
-<h5 id="1-Linux-命令行提示字符串着色"><a href="#1-Linux-命令行提示字符串着色" class="headerlink" title="1. Linux 命令行提示字符串着色"></a>1. Linux 命令行提示字符串着色</h5><p><strong>情景</strong>: 提示符着色，可以使我们在繁多的输出中区分开各个命令的输出结果.linux中环境变量 <code>PS1</code> 代表着命令提示符的属性，默认为：<code>\u@\h: \w\$</code></p>
+        <h4 id="Git-命令别名"><a href="#Git-命令别名" class="headerlink" title="Git 命令别名"></a>Git 命令别名</h4><figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ git config --global alias.<span class="string">[Shortcut]</span> <span class="string">[Command]</span></span><br></pre></td></tr></table></figure>
+<h4 id="Git-nix自动补全"><a href="#Git-nix自动补全" class="headerlink" title="Git *nix自动补全"></a>Git *nix自动补全</h4><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$ </span>cd ~</span><br><span class="line"></span><br><span class="line"><span class="variable">$ </span>curl <span class="symbol">https:</span>/<span class="regexp">/raw.github.com/git</span><span class="regexp">/git/master</span><span class="regexp">/contrib/completion</span><span class="regexp">/git-completion.bash -o ~/</span>.git-completion.bash</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -372,12 +297,12 @@
       
 	<div class="article-tag tagcloud">
 	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
 	</div>
 
       
         <p class="article-more-link">
-          <a  href="/2015/09/07/ 高效 Linux.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+          <a  href="/2015/09/07/Git 进阶.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
         </p>
       
       <div class="clearfix"></div>
@@ -395,7 +320,7 @@
 
 
   
-    <article id="post-Hexo博客个性化" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-STM32 I2C 驱动" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
     
@@ -406,7 +331,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/05/Hexo博客个性化.html">Hexo站点个性化</a>
+      <a class="article-title" href="/2015/09/07/STM32 I2C 驱动.html">STM32 I2C 驱动</a>
     </h1>
   
 
@@ -415,10 +340,10 @@
   
     <div class="article-meta">
       <p>
-	      <i class="fa fa-calendar"></i>2015-09-05</i>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
 	      
 	      
-	<i class="fa fa-file-word-o"></i>3,385&nbsp;word
+	<i class="fa fa-file-word-o"></i>174&nbsp;word
 
 	      
 
@@ -432,25 +357,14 @@
 
 
 	  	
-<div class="gallery">
-  <div class="photoset"  style="text-align: center; width: 85%; margin:auto;">
-    
-      
-        <img src="http://falleaf.oss-cn-shenzhen.aliyuncs.com/blog_source%2F2015-09%2Fhexo.png">
-      
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-	
   
     <div class="article-entry" itemprop="articleBody">
 
       
-        <h2 id="主题选择"><a href="#主题选择" class="headerlink" title="主题选择"></a>主题选择</h2><p>本站整体上使用了 Litten 的 <a href="https://github.com/litten/hexo-theme-yilia">Yilia</a> 主题。并在它的基础上做了些小小的修改。你可以到官网选择自己喜欢的主题：<a href="https://hexo.io/themes/">戳这</a>。<br>使用方法：<code>git  clone [theme_url]</code> 到目录 <code>/themes/</code>.并修改根目录下主配置文件 <strong>_config.yml</strong><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: http://hexo.io/plugins/</span><br><span class="line">## Themes: http://hexo.io/themes/</span><br><span class="line"># theme: landscape-plus</span><br><span class="line">theme: your_theme_name  # 填写你的主题名</span><br></pre></td></tr></table></figure></p>
+		
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><h4 id="写模式："><a href="#写模式：" class="headerlink" title="写模式："></a>写模式：</h4><p>检测总线 —&gt; 发送 <code>起始信号</code> —&gt; 发送 <code>从器件地址</code> + <code>写模式</code>  —&gt; 发送 <code>从器件寄存器地址</code>  —&gt;  发送 <code>数据</code></p>
+<h4 id="读模式："><a href="#读模式：" class="headerlink" title="读模式："></a>读模式：</h4><p>检测总线 —&gt; 发送 <code>起始信号</code> —&gt; 发送 <code>从器件地址</code> + <code>写模式</code>  —&gt; 发送 <code>从器件寄存器地址</code>   —&gt;  再次发送 <code>起始信号</code>   —&gt; 再次发送 <code>从器件地址</code> + <code>读模式</code>  —&gt;  读取 <code>数据</code></p>
+
       
     </div>
 
@@ -460,13 +374,9 @@
       
 	<div class="article-tag tagcloud">
 	<i class="fa fa-tags"> </i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stm32/">stm32</a></li></ul>
 	</div>
 
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/05/Hexo博客个性化.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -556,6 +466,94 @@
       
         <p class="article-more-link">
           <a  href="/2015/09/05/Hexo+Github 免费建博客.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Hexo博客个性化" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/05/Hexo博客个性化.html">Hexo站点个性化</a>
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2015-09-05</i>
+	      
+	      
+	<i class="fa fa-file-word-o"></i>3,385&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+    
+
+
+	  	
+<div class="gallery">
+  <div class="photoset"  style="text-align: center; width: 85%; margin:auto;">
+    
+      
+        <img src="http://falleaf.oss-cn-shenzhen.aliyuncs.com/blog_source%2F2015-09%2Fhexo.png">
+      
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+        <h2 id="主题选择"><a href="#主题选择" class="headerlink" title="主题选择"></a>主题选择</h2><p>本站整体上使用了 Litten 的 <a href="https://github.com/litten/hexo-theme-yilia">Yilia</a> 主题。并在它的基础上做了些小小的修改。你可以到官网选择自己喜欢的主题：<a href="https://hexo.io/themes/">戳这</a>。<br>使用方法：<code>git  clone [theme_url]</code> 到目录 <code>/themes/</code>.并修改根目录下主配置文件 <strong>_config.yml</strong><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: http://hexo.io/plugins/</span><br><span class="line">## Themes: http://hexo.io/themes/</span><br><span class="line"># theme: landscape-plus</span><br><span class="line">theme: your_theme_name  # 填写你的主题名</span><br></pre></td></tr></table></figure></p>
+      
+    </div>
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/05/Hexo博客个性化.html">more&nbsp;<i class="fa fa-angle-double-right"></i></a>
         </p>
       
       <div class="clearfix"></div>
