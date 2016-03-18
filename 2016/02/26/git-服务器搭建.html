@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Git 服务器搭建 | LuoYe&#39;blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="强大的互联网已经为我们提供了种类繁多的 git 仓库，然而有时候为了安全考虑，服务器放在自家才是最安全。这里就稍微介绍下，如何在 Linux/Windows 下部署自家的 Git 仓库
+
+Linux(CentOS)平台Linux 下搭建比较简单，Git出生于此，没有任何兼容性问题。推荐把Git服务器搭建在 Linux 平台
+1.安装 Git 服务  
+ # yum install -y git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git 服务器搭建">
+<meta property="og:url" content="http://blog.falleaf.com/2016/02/26/git-服务器搭建.html">
+<meta property="og:site_name" content="LuoYe'blog">
+<meta property="og:description" content="强大的互联网已经为我们提供了种类繁多的 git 仓库，然而有时候为了安全考虑，服务器放在自家才是最安全。这里就稍微介绍下，如何在 Linux/Windows 下部署自家的 Git 仓库
+
+Linux(CentOS)平台Linux 下搭建比较简单，Git出生于此，没有任何兼容性问题。推荐把Git服务器搭建在 Linux 平台
+1.安装 Git 服务  
+ # yum install -y git">
+<meta property="og:image" content="http://blog.falleaf.com/http://">
+<meta property="og:image" content="http://blog.falleaf.com/http://">
+<meta property="og:image" content="http://blog.falleaf.com/http://">
+<meta property="og:image" content="http://blog.falleaf.com/http://">
+<meta property="og:image" content="http://blog.falleaf.com/http://">
+<meta property="og:updated_time" content="2016-02-29T08:48:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git 服务器搭建">
+<meta name="twitter:description" content="强大的互联网已经为我们提供了种类繁多的 git 仓库，然而有时候为了安全考虑，服务器放在自家才是最安全。这里就稍微介绍下，如何在 Linux/Windows 下部署自家的 Git 仓库
+
+Linux(CentOS)平台Linux 下搭建比较简单，Git出生于此，没有任何兼容性问题。推荐把Git服务器搭建在 Linux 平台
+1.安装 Git 服务  
+ # yum install -y git">
+<meta name="twitter:image" content="http://blog.falleaf.com/http://">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+
+
+	
+	<form id="search">
+	<input type="text" class="st-search-launcher" placeholder="search..."><button><i class="fa fa-search"></i> </button>
+	</form>
+	
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','1n-7fx-Zx9q6ig4dxYeV','2.0.0');
+</script>
+
+
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+
+
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">叶子的背叛</p>
+		
+<div>
+					<section class="switch-part switch-part1">
+						<nav class="header-menu">
+							<ul>
+							
+								<li><a href="/">主页</a></li>
+					        
+								<li><a href="/archives">归档</a></li>
+					        
+							</ul>
+						</nav>
+						<nav class="header-nav">
+							<div class="social">
+								
+									<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+						        
+									<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+						        
+							</div>
+						</nav>
+					</section>
+					
+					
+					<section class="switch-part switch-part2">
+						<div class="widget tagcloud" id="js-tagcloud">
+							<a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/smt32/" style="font-size: 10px;">smt32</a> <a href="/tags/飞控/" style="font-size: 10px;">飞控</a>
+						</div>
+					</section>
+					
+					
+					
+					<section class="switch-part switch-part3">
+						<div id="js-friends">
+						
+				          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hexo.io">hexo</a>
+				        
+				        </div>
+					</section>
+					
+
+					
+					
+					<section class="switch-part switch-part4">
+					
+						<div id="js-aboutme">一只游走于IT界的半调子猿猴...</div>
+					</section>
+									
+</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">LuoYe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+			</hgroup>
+
+			
+			<p class="header-subtitle">叶子的背叛</p>
+			
+
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-git-服务器搭建" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Git 服务器搭建
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2016-02-26</i>
+	      
+	      <i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>&nbsp;view
+	      
+	      
+	<i class="fa fa-file-word-o"></i>1,000&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+
+	  	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+		
+<div id="toc" class="toc-article">
+	<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-CentOS-平台"><span class="toc-number">1.</span> <span class="toc-text">Linux(CentOS)平台</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Windows平台"><span class="toc-number">2.</span> <span class="toc-text">Windows平台</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GIT服务器搭建完成"><span class="toc-number">3.</span> <span class="toc-text">GIT服务器搭建完成</span></a></li></ol>
+</div>
+
+
+        <blockquote>
+<p>强大的互联网已经为我们提供了种类繁多的 git 仓库，然而有时候为了安全考虑，服务器放在自家才是最安全。这里就稍微介绍下，如何在 Linux/Windows 下部署自家的 Git 仓库</p>
+</blockquote>
+<h4 id="Linux-CentOS-平台"><a href="#Linux-CentOS-平台" class="headerlink" title="Linux(CentOS)平台"></a>Linux(CentOS)平台</h4><p>Linux 下搭建比较简单，Git出生于此，没有任何兼容性问题。推荐把Git服务器搭建在 Linux 平台</p>
+<p>1.安装 Git 服务  </p>
+ <figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta"># yum install -y git</span></span><br></pre></td></tr></table></figure>
+ <a id="more"></a>
+<p>2.建立 Git 专用账户</p>
+ <figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="meta"># useradd git   <span class="comment">// 添加 git 用户</span></span></span><br><span class="line"><span class="meta"># password git  <span class="comment">// 设置 git 用户名</span></span></span><br><span class="line"><span class="meta"># su git   <span class="comment">// 切换到 git 用户</span></span></span><br></pre></td></tr></table></figure>
+<p>3.建立服务器Repository </p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">$ cd ~ </span><br><span class="line">$ mkdir work<span class="selector-class">.git</span>   <span class="comment">// 约定俗成Git 仓库以.git 结尾</span></span><br><span class="line">$ cd work<span class="selector-class">.git</span></span><br><span class="line">$ git init --bare  <span class="comment">// 建立服务器端（空仓库）</span></span><br></pre></td></tr></table></figure>
+<p>成功后 work.git 目录下有如下文件：</p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line">$ ls</span><br><span class="line"><span class="keyword">branches </span> config  description  HEAD  hooks  index  <span class="meta">info</span>  objects  refs</span><br></pre></td></tr></table></figure>
+<p>4.Linux 下搭建 Git服务如此简单….</p>
+<hr>
+<h4 id="Windows平台"><a href="#Windows平台" class="headerlink" title="Windows平台"></a>Windows平台</h4><p>Git 对于 windows 来说作为外来物种，难免出现乱七八糟的毛病，所以如果你不想惹这些麻烦，劝你还是远离Windows。并学会 linux ，努力成为一名合格的coder／developer。</p>
+<p>1 准备所需软件  </p>
+<p><a href="https://www.itefix.net/copssh" target="_blank" rel="external"><code>COPSSH</code></a>、 <a href="https://git-for-windows.github.io" target="_blank" rel="external"><code>git-for-windows</code></a>(自行下载)</p>
+<p><strong><em> 按默认方式安装，什么都不需要更改  </em></strong></p>
+<p>2 新建 GIT 专用用户</p>
+<p>就是创建一个 window 用户用于 git 使用。没必要啰嗦了，不会自行度娘补脑（<strong>记得设置密码</strong>）</p>
+<p>3 配置 COPSSH</p>
+<p>COPSSH control pannel -&gt; Users -&gt; Add</p>
+<p><img src="http://" alt="image"></p>
+<p>选择 Forward </p>
+<p><img src="http://" alt="image"></p>
+<p>COPSSH control pannel -&gt; Status  显示为绿色，即代表ssh启动成功</p>
+<p><img src="http://" alt="image"></p>
+<p>至此 Window 上建立了SSH服务，这才是准备工作，后面还有…..</p>
+<p>3 建立服务器Repository</p>
+<ul>
+<li><p>进入到 <code>COPSSH</code> 中配置的 <code>用户家目录</code>。在里面新建 <code>work.git</code> 文件夹，并进入此目录</p>
+</li>
+<li><p>在此文件夹中建立 git 仓库<br>空白处右击</p>
+</li>
+</ul>
+<p><img src="http://" alt="image"></p>
+<p>＋ 在命令行中输入</p>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">$ git init <span class="comment">--bare</span></span><br></pre></td></tr></table></figure>
+<p>此目录下同样会出现如下文件</p>
+<p><img src="http://" alt="image"></p>
+<ul>
+<li>至此服务器仓库已建立好，但是由于window的特殊原因需要额外做如下操作。否则会报错（应为这个折腾死我了）<br>&gt;<br><strong><em>拷贝git安装目录下/libexec/git-core/ 所有文件—&gt;COPSSH安装目录下/bin/文件夹中</em></strong></li>
+</ul>
+<hr>
+<h4 id="GIT服务器搭建完成"><a href="#GIT服务器搭建完成" class="headerlink" title="GIT服务器搭建完成"></a>GIT服务器搭建完成</h4><ul>
+<li>至此你可以用 格式：<code>[user_name]@[your_ip]:[repo_name]</code> 使用该GIT仓库了.</li>
+</ul>
+<p><strong>eg:</strong>  </p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">$ git <span class="keyword">clone</span> <span class="title">git</span>@<span class="number">192.168</span>.<span class="number">1.145</span>:work.git</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/05/飞控开发.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          飞控开发－－气压计/高度计(MS5611)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/07/find-linux-command.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">find-linux-command</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="git-服务器搭建" data-title="Git 服务器搭建" data-url="http://blog.falleaf.com/2016/02/26/git-服务器搭建.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luoye"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 LuoYe
+        
+        <span id="busuanzi_container_site_uv">|&nbsp;您是本站第 <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 位访客</span>
+        
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten&nbsp;|&nbsp;<a href="/sitemap.xml" target="_blank">sitemap</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>

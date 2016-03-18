@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>飞控开发－－气压计/高度计(MS5611) | LuoYe&#39;blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ms5611简介：
+
+ 官方给出的最大分辨率：10cm  
+ 工作电压： 1.8v ~ 3.6v  
+ 气压 AD 精度：24位  
+ 工作环境：－40 ~ +85°C，10 ~ 1200mbar(毫巴 ＝ 百帕)  
+ 通讯接口： I2C/SPI (PS:1 - I2C ; PS:0 - SPI)  
+ 焊接条件： &amp;lt;250°C  &amp;lt; 40秒   
+
+开发环境：  
+
+开发板： st">
+<meta property="og:type" content="article">
+<meta property="og:title" content="飞控开发－－气压计/高度计(MS5611)">
+<meta property="og:url" content="http://blog.falleaf.com/2016/03/05/飞控开发.html">
+<meta property="og:site_name" content="LuoYe'blog">
+<meta property="og:description" content="ms5611简介：
+
+ 官方给出的最大分辨率：10cm  
+ 工作电压： 1.8v ~ 3.6v  
+ 气压 AD 精度：24位  
+ 工作环境：－40 ~ +85°C，10 ~ 1200mbar(毫巴 ＝ 百帕)  
+ 通讯接口： I2C/SPI (PS:1 - I2C ; PS:0 - SPI)  
+ 焊接条件： &amp;lt;250°C  &amp;lt; 40秒   
+
+开发环境：  
+
+开发板： st">
+<meta property="og:image" content="http://blog.falleaf.com/resource/fly/ms5611_addr.png">
+<meta property="og:image" content="http://blog.falleaf.com/resource/fly/ms5611reg.png">
+<meta property="og:image" content="http://blog.falleaf.com/resource/fly/ms5611_prom.png">
+<meta property="og:image" content="http://blog.falleaf.com/resource/fly/ms5611_second_order.png">
+<meta property="og:updated_time" content="2016-03-18T05:23:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="飞控开发－－气压计/高度计(MS5611)">
+<meta name="twitter:description" content="ms5611简介：
+
+ 官方给出的最大分辨率：10cm  
+ 工作电压： 1.8v ~ 3.6v  
+ 气压 AD 精度：24位  
+ 工作环境：－40 ~ +85°C，10 ~ 1200mbar(毫巴 ＝ 百帕)  
+ 通讯接口： I2C/SPI (PS:1 - I2C ; PS:0 - SPI)  
+ 焊接条件： &amp;lt;250°C  &amp;lt; 40秒   
+
+开发环境：  
+
+开发板： st">
+<meta name="twitter:image" content="http://blog.falleaf.com/resource/fly/ms5611_addr.png">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+
+
+	
+	<form id="search">
+	<input type="text" class="st-search-launcher" placeholder="search..."><button><i class="fa fa-search"></i> </button>
+	</form>
+	
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','1n-7fx-Zx9q6ig4dxYeV','2.0.0');
+</script>
+
+
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+
+
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">叶子的背叛</p>
+		
+<div>
+					<section class="switch-part switch-part1">
+						<nav class="header-menu">
+							<ul>
+							
+								<li><a href="/">主页</a></li>
+					        
+								<li><a href="/archives">归档</a></li>
+					        
+							</ul>
+						</nav>
+						<nav class="header-nav">
+							<div class="social">
+								
+									<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+						        
+									<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+						        
+							</div>
+						</nav>
+					</section>
+					
+					
+					<section class="switch-part switch-part2">
+						<div class="widget tagcloud" id="js-tagcloud">
+							<a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/smt32/" style="font-size: 10px;">smt32</a> <a href="/tags/飞控/" style="font-size: 10px;">飞控</a>
+						</div>
+					</section>
+					
+					
+					
+					<section class="switch-part switch-part3">
+						<div id="js-friends">
+						
+				          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hexo.io">hexo</a>
+				        
+				        </div>
+					</section>
+					
+
+					
+					
+					<section class="switch-part switch-part4">
+					
+						<div id="js-aboutme">一只游走于IT界的半调子猿猴...</div>
+					</section>
+									
+</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">LuoYe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+			</hgroup>
+
+			
+			<p class="header-subtitle">叶子的背叛</p>
+			
+
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-飞控开发" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      飞控开发－－气压计/高度计(MS5611)
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2016-03-05</i>
+	      
+	      <i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>&nbsp;view
+	      
+	      
+	<i class="fa fa-file-word-o"></i>7,668&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smt32/">smt32</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/飞控/">飞控</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+
+	  	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+		
+<div id="toc" class="toc-article">
+	<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#MS5611接口及相应寄存器定义－drv-ms5611-h"><span class="toc-number">1.</span> <span class="toc-text">MS5611接口及相应寄存器定义－drv_ms5611.h</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ms5611-代码实现-－-drv-ms5611-c"><span class="toc-number">2.</span> <span class="toc-text">ms5611 代码实现 － drv_ms5611.c</span></a></li></ol>
+</div>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><p>ms5611简介：</p>
+<blockquote>
+<p> 官方给出的最大分辨率：10cm  </p>
+<p> 工作电压： 1.8v ~ 3.6v  </p>
+<p> 气压 AD 精度：24位  </p>
+<p> 工作环境：－40 ~ +85°C，10 ~ 1200mbar(毫巴 ＝ 百帕)  </p>
+<p> 通讯接口： I2C/SPI (PS:1 - I2C ; PS:0 - SPI)  </p>
+<p> 焊接条件： &lt;250°C  &lt; 40秒   </p>
+</blockquote>
+<p>开发环境：  </p>
+<blockquote>
+<p>开发板： stm32F4discovery   </p>
+<p>气压计模块：GY-63(ms5611)   </p>
+<p>开发工具：window7 ＋ MDK(Keil5.1) </p>
+<p>程序依赖模块： I2C／SPI 驱动 (此处使用的i2c通讯接口)</p>
+</blockquote>
+<h4 id="MS5611接口及相应寄存器定义－drv-ms5611-h"><a href="#MS5611接口及相应寄存器定义－drv-ms5611-h" class="headerlink" title="MS5611接口及相应寄存器定义－drv_ms5611.h"></a>MS5611接口及相应寄存器定义－drv_ms5611.h</h4><a id="more"></a>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"stdbool.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// MS5611, Standard address 0x77</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MS5611_ADDR             0x77</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CMD_RESET               0x1E <span class="comment">// ADC reset command</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CMD_ADC_READ            0x00 <span class="comment">// ADC read command</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CMD_ADC_CONV            0x40 <span class="comment">// ADC conversion command</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CMD_ADC_D1              0x00 <span class="comment">// ADC D1 conversion</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CMD_ADC_D2              0x10 <span class="comment">// ADC D2 conversion</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CMD_ADC_256             0x00 <span class="comment">// ADC OSR=256</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CMD_ADC_512             0x02 <span class="comment">// ADC OSR=512</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CMD_ADC_1024            0x04 <span class="comment">// ADC OSR=1024</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CMD_ADC_2048            0x06 <span class="comment">// ADC OSR=2048</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CMD_ADC_4096            0x08 <span class="comment">// ADC OSR=4096</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CMD_PROM_RD             0xA0 <span class="comment">// Prom read command</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PROM_NB                 8</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MS5611_OSR_4096_CONV_DELAY		 8220	<span class="comment">// 8.22ms</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MS5611_OSR_2018_CONV_DELAY		 4130	<span class="comment">// 4.13ms</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MS5611_OSR_1024_CONV_DELAY		 2080	</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MS5611_OSR_512_CONV_DELAY		 1060	</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MS5611_OSR_256_CONV_DELAY		 540	</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ms5611Init</span><span class="params">(<span class="keyword">void</span>)</span></span>;  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ms5611_start_ut</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ms5611_get_ut</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ms5611_start_up</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ms5611_get_up</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ms5611_calculate</span><span class="params">(int32_t *pressure, int32_t *temperature)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">getEstimatedAltitude</span><span class="params">(int32_t baroPressure)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>ms5611 i2c 地址定义，由芯片管脚 CSB 决定.<code>111011Cx</code>,其中C为CSB引脚的补码值(取反).<br><img src="/resource/fly/ms5611_addr.png" alt="ms5611_addr"></p>
+<p><code>TIP:</code> <strong>本案例中i2c地址 0x77  并没有把i2c 的读写标志位包括，所以在I2C 读写代码实现时务必手动左移。</strong> </p>
+</li>
+<li><p>ms5611 官方手册 寄存器地址 说明：<br><img src="/resource/fly/ms5611reg.png" alt="ms5611reg"></p>
+</li>
+</ul>
+<h4 id="ms5611-代码实现-－-drv-ms5611-c"><a href="#ms5611-代码实现-－-drv-ms5611-c" class="headerlink" title="ms5611 代码实现 － drv_ms5611.c"></a>ms5611 代码实现 － drv_ms5611.c</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"drv_system.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"drv_i2c.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"drv_ms5611.h"</span></span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">uint32_t</span> ms5611_ut;  <span class="comment">// static result of temperature measurement</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">uint32_t</span> ms5611_up;  <span class="comment">// static result of pressure measurement</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">uint16_t</span> ms5611_c[PROM_NB];  <span class="comment">// on-chip ROM</span></span><br><span class="line"><span class="comment">//static uint8_t ms5611_osr = CMD_ADC_4096;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PA_OFFSET_INIT_NUM 50	</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">float</span> Alt_offset_Pa=<span class="number">0</span>; </span><br><span class="line"><span class="keyword">double</span> paOffsetNum = <span class="number">0</span>; </span><br><span class="line"><span class="keyword">uint16_t</span>  paInitCnt=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">uint8_t</span> paOffsetInited=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> uint16_t <span class="title">ms5611_prom</span><span class="params">(int8_t coef_num)</span></span>;  </span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ms5611_reset</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">static</span> uint32_t <span class="title">ms5611_read_adc</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">static</span> int8_t <span class="title">ms5611_crc</span><span class="params">(uint16_t *prom)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ms5611Init</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span><br><span class="line"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> ack = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">uint8_t</span> sig;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">    delayMs(<span class="number">10</span>); <span class="comment">// No idea how long the chip takes to power-up, but let's make it 10ms</span></span><br><span class="line">    ack = i2cRead(MS5611_ADDR, CMD_PROM_RD, <span class="number">1</span>, &amp;sig);</span><br><span class="line">    <span class="keyword">if</span> (!ack)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    ms5611_reset();</span><br><span class="line">    <span class="comment">// read all coefficients</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; PROM_NB; i++)</span><br><span class="line">        ms5611_c[i] = ms5611_prom(i);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(ms5611_crc(ms5611_prom) != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ms5611_reset</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    i2cWrite(MS5611_ADDR, CMD_RESET, <span class="number">1</span>);</span><br><span class="line">    delayMs(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line">* 读取 ms5611 出厂校准数据</span><br><span class="line">*/</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> uint16_t <span class="title">ms5611_prom</span><span class="params">(int8_t coef_num)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">uint8_t</span> rxbuf[<span class="number">2</span>] = &#123; <span class="number">0</span>, <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">    i2cRead(MS5611_ADDR, CMD_PROM_RD + coef_num * <span class="number">2</span>, <span class="number">2</span>, rxbuf); <span class="comment">// send PROM READ command</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> rxbuf[<span class="number">0</span>] &lt;&lt; <span class="number">8</span> | rxbuf[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line">* 读取 ms5611 采集的 温度/气压(24bit)</span><br><span class="line">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> uint32_t <span class="title">ms5611_read_adc</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">uint8_t</span> rxbuf[<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line">    i2cRead(MS5611_ADDR, CMD_ADC_READ, <span class="number">3</span>, rxbuf); <span class="comment">// read ADC</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> (rxbuf[<span class="number">0</span>] &lt;&lt; <span class="number">16</span>) | (rxbuf[<span class="number">1</span>] &lt;&lt; <span class="number">8</span>) | rxbuf[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/*</span><br><span class="line"> * 开始采集温度.</span><br><span class="line"> */</span></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">ms5611_start_ut</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    i2cWrite(MS5611_ADDR, CMD_ADC_CONV + CMD_ADC_D2 + CMD_ADC_4096, <span class="number">1</span>); <span class="comment">// D2 (temperature) conversion start!</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> <span class="comment">/*</span><br><span class="line">  * 读取出 MS5611 采集的温度AD值</span><br><span class="line">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">ms5611_get_ut</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    ms5611_ut = ms5611_read_adc();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/*</span><br><span class="line">  * 开始采集气压.</span><br><span class="line">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">ms5611_start_up</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    i2cWrite(MS5611_ADDR, CMD_ADC_CONV + CMD_ADC_D1 + CMD_ADC_4096, <span class="number">1</span>); <span class="comment">// D1 (pressure) conversion start!</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/*</span><br><span class="line">  * 读取出 MS5611 采集的气压AD值</span><br><span class="line">  */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ms5611_get_up</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    ms5611_up = ms5611_read_adc();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line"> * 读取的气压&amp;温度AD值转换为实际值并作温度补偿(温度精度:0.01℃，气压精度:0.01mbar)</span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ms5611_calculate</span><span class="params">(int32_t *pressure, int32_t *temperature)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">uint32_t</span> press;</span><br><span class="line">    <span class="keyword">int64_t</span> temp;</span><br><span class="line">    <span class="keyword">int64_t</span> delt;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int32_t</span> dT = (<span class="keyword">int64_t</span>)ms5611_ut - ((<span class="keyword">uint64_t</span>)ms5611_c[<span class="number">5</span>] * <span class="number">256</span>);</span><br><span class="line">    <span class="keyword">int64_t</span> off = ((<span class="keyword">int64_t</span>)ms5611_c[<span class="number">2</span>] &lt;&lt; <span class="number">16</span>) + (((<span class="keyword">int64_t</span>)ms5611_c[<span class="number">4</span>] * dT) &gt;&gt; <span class="number">7</span>);</span><br><span class="line">    <span class="keyword">int64_t</span> sens = ((<span class="keyword">int64_t</span>)ms5611_c[<span class="number">1</span>] &lt;&lt; <span class="number">15</span>) + (((<span class="keyword">int64_t</span>)ms5611_c[<span class="number">3</span>] * dT) &gt;&gt; <span class="number">8</span>);</span><br><span class="line">    temp = <span class="number">2000</span> + ((dT * (<span class="keyword">int64_t</span>)ms5611_c[<span class="number">6</span>]) &gt;&gt; <span class="number">23</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (temp &lt; <span class="number">2000</span>) &#123; <span class="comment">// temperature lower than 20degC</span></span><br><span class="line">        delt = temp - <span class="number">2000</span>;</span><br><span class="line">        delt = <span class="number">5</span> * delt * delt;</span><br><span class="line">        off -= delt &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        sens -= delt &gt;&gt; <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (temp &lt; <span class="number">-1500</span>) &#123; <span class="comment">// temperature lower than -15degC</span></span><br><span class="line">            delt = temp + <span class="number">1500</span>;</span><br><span class="line">            delt = delt * delt;</span><br><span class="line">            off -= <span class="number">7</span> * delt;</span><br><span class="line">            sens -= (<span class="number">11</span> * delt) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    press = ((((<span class="keyword">int64_t</span>)ms5611_up * sens) &gt;&gt; <span class="number">21</span>) - off) &gt;&gt; <span class="number">15</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (pressure)</span><br><span class="line">        *pressure = press;</span><br><span class="line">    <span class="keyword">if</span> (temperature)</span><br><span class="line">        *temperature = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line"> * ms5611 prom 数据 校验</span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> int8_t <span class="title">ms5611_crc</span><span class="params">(uint16_t *prom)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int32_t</span> i, j;</span><br><span class="line">    <span class="keyword">uint32_t</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">uint8_t</span> zero = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">uint8_t</span> crc = prom[<span class="number">7</span>] &amp; <span class="number">0xF</span>;</span><br><span class="line">    prom[<span class="number">7</span>] &amp;= <span class="number">0xFF00</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// if eeprom is all zeros, we're probably fucked - BUT this will return valid CRC lol</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (prom[i] != <span class="number">0</span>)</span><br><span class="line">            zero = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (zero)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">16</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &amp; <span class="number">1</span>)</span><br><span class="line">            res ^= ((prom[i &gt;&gt; <span class="number">1</span>]) &amp; <span class="number">0x00FF</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            res ^= (prom[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">8</span>);</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">8</span>; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (res &amp; <span class="number">0x8000</span>)</span><br><span class="line">                res ^= <span class="number">0x1800</span>;</span><br><span class="line">            res &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    prom[<span class="number">7</span>] |= crc;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (crc == ((res &gt;&gt; <span class="number">12</span>) &amp; <span class="number">0xF</span>))</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line"> * 气压解算为高度值(cm)</span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">getEstimatedAltitude</span><span class="params">(int32_t baroPressure)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">float</span> Altitude;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(Alt_offset_Pa == <span class="number">0</span>)&#123; </span><br><span class="line">		<span class="keyword">if</span>(paInitCnt &gt; PA_OFFSET_INIT_NUM)&#123;</span><br><span class="line">			Alt_offset_Pa = paOffsetNum / paInitCnt;</span><br><span class="line">			paOffsetInited=<span class="number">1</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span></span><br><span class="line">		paOffsetNum += baroPressure;  </span><br><span class="line">		paInitCnt++; </span><br><span class="line">		Altitude = <span class="number">0</span>; </span><br><span class="line"><span class="keyword">return</span> Altitude;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	Altitude = <span class="number">4433000.0f</span> * (<span class="number">1</span> - powf((((<span class="keyword">float</span>) baroPressure) / Alt_offset_Pa), <span class="number">0.190295f</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> Altitude; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>由于气压受温度影响，所以需要进行温度补偿。<code>void ms5611_calculate(int32_t *pressure, int32_t *temperature)</code></li>
+</ul>
+<p><strong>温度计算公式：</strong></p>
+<p>实际和参考温度之间的差异:</p>
+<div style="text-align:center;"><br><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>T</mi><mo>=</mo><mi>D</mi><mn>2</mn><mo>−</mo><msub><mi>T</mi><mrow><mi>R</mi><mi>E</mi><mi>F</mi></mrow></msub><mo>=</mo><mi>D</mi><mn>2</mn><mo>−</mo><mi>C</mi><mn>5</mn><mo>∗</mo><msup><mn>2</mn><mrow><mn>8</mn></mrow></msup></mrow><annotation encoding="application/x-tex">dT = D2 - T_{REF}  = D2 - C5*2^{8}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.964108em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord mathit">d</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.02778em;">D</span><span class="mord mathrm">2</span><span class="mbin">−</span><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.13889em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathit" style="margin-right:0.05764em;">E</span><span class="mord mathit" style="margin-right:0.13889em;">F</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.02778em;">D</span><span class="mord mathrm">2</span><span class="mbin">−</span><span class="mord mathit" style="margin-right:0.07153em;">C</span><span class="mord mathrm">5</span><span class="mbin">∗</span><span class="mord"><span class="mord mathrm">2</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">8</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span><br></div>
+
+<p>实际温度(-40…85°C / 0.01°C的分辨率):</p>
+<div style="text-align:center;"><br><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mi>E</mi><mi>M</mi><mi>P</mi><mo>=</mo><mn>2</mn><mn>0</mn><mo>+</mo><mi>d</mi><mi>T</mi><mo>∗</mo><mi>T</mi><mi>E</mi><mi>M</mi><mi>P</mi><mi>S</mi><mi>E</mi><mi>N</mi><mi>S</mi><mo>=</mo><mn>2</mn><mn>0</mn><mn>0</mn><mn>0</mn><mo>+</mo><mi>d</mi><mi>T</mi><mo>∗</mo><mi>C</mi><mn>6</mn><mi mathvariant="normal">/</mi><msup><mn>2</mn><mrow><mn>2</mn><mn>3</mn></mrow></msup></mrow><annotation encoding="application/x-tex">TEMP = 20 + dT*TEMPSENS = 2000 + dT*C6/2^{23}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.05764em;">E</span><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mrel">=</span><span class="mord mathrm">2</span><span class="mord mathrm">0</span><span class="mbin">+</span><span class="mord mathit">d</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mbin">∗</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.05764em;">E</span><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathit" style="margin-right:0.05764em;">E</span><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mrel">=</span><span class="mord mathrm">2</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mbin">+</span><span class="mord mathit">d</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mbin">∗</span><span class="mord mathit" style="margin-right:0.07153em;">C</span><span class="mord mathrm">6</span><span class="mord mathrm">/</span><span class="mord"><span class="mord mathrm">2</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">2</span><span class="mord mathrm">3</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span><br></div>
+
+
+<p><strong>温度补偿下气压计算公式：</strong></p>
+<p>实际温度抵消 ：</p>
+<div style="text-align:center;"><br><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mi>F</mi><mi>F</mi><mo>=</mo><mi>O</mi><mi>F</mi><msub><mi>F</mi><mrow><mi>T</mi><mn>1</mn></mrow></msub><mo>+</mo><mi>T</mi><mi>C</mi><mi>O</mi><mo>∗</mo><mi>d</mi><mi>T</mi><mo>=</mo><mi>C</mi><mn>2</mn><mo>∗</mo><msup><mn>2</mn><mrow><mn>1</mn><mn>6</mn></mrow></msup><mo>+</mo><mo>(</mo><mi>C</mi><mn>4</mn><mo>∗</mo><mi>d</mi><mi>T</mi><mo>)</mo><mi mathvariant="normal">/</mi><msup><mn>2</mn><mrow><mn>7</mn></mrow></msup></mrow><annotation encoding="application/x-tex">OFF = OFF_{T1} + TCO*dT = C2*2^{16} + (C4*dT) / 2^{7}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.13889em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathrm">1</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mbin">+</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.07153em;">C</span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mbin">∗</span><span class="mord mathit">d</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.07153em;">C</span><span class="mord mathrm">2</span><span class="mbin">∗</span><span class="mord"><span class="mord mathrm">2</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">1</span><span class="mord mathrm">6</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mbin">+</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.07153em;">C</span><span class="mord mathrm">4</span><span class="mbin">∗</span><span class="mord mathit">d</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mclose">)</span><span class="mord mathrm">/</span><span class="mord"><span class="mord mathrm">2</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">7</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span><br></div>
+
+<p>实际温度灵敏度 :</p>
+<div style="text-align:center;"><br><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mi>E</mi><mi>N</mi><mi>S</mi><mo>=</mo><mi>S</mi><mi>E</mi><mi>N</mi><msub><mi>S</mi><mrow><mi>T</mi><mn>1</mn></mrow></msub><mo>+</mo><mi>T</mi><mi>C</mi><mi>S</mi><mo>∗</mo><mi>d</mi><mi>T</mi><mo>=</mo><mi>C</mi><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mrow><mn>1</mn><mn>5</mn></mrow></msup><mo>+</mo><mo>(</mo><mi>C</mi><mn>3</mn><mo>∗</mo><mi>d</mi><mi>T</mi><mo>)</mo><mi mathvariant="normal">/</mi><msup><mn>2</mn><mrow><mn>8</mn></mrow></msup></mrow><annotation encoding="application/x-tex">SENS = SENS_{T1} + TCS*dT = C1*2^{15} + (C3*dT) / 2^{8}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathit" style="margin-right:0.05764em;">E</span><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathit" style="margin-right:0.05764em;">E</span><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mord"><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.05764em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathrm">1</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mbin">+</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.07153em;">C</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mbin">∗</span><span class="mord mathit">d</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.07153em;">C</span><span class="mord mathrm">1</span><span class="mbin">∗</span><span class="mord"><span class="mord mathrm">2</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">1</span><span class="mord mathrm">5</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mbin">+</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.07153em;">C</span><span class="mord mathrm">3</span><span class="mbin">∗</span><span class="mord mathit">d</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mclose">)</span><span class="mord mathrm">/</span><span class="mord"><span class="mord mathrm">2</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">8</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span><br></div>
+
+<p>温度补偿后得到的气压值：（10 ～ 1200mbar／ 0.001mbar分辨率）</p>
+<div style="text-align:center;"><br><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo>=</mo><mi>D</mi><mn>1</mn><mo>∗</mo><mi>S</mi><mi>E</mi><mi>N</mi><mi>S</mi><mo>−</mo><mi>O</mi><mi>F</mi><mi>F</mi><mo>=</mo><mo>(</mo><mi>D</mi><mn>1</mn><mo>∗</mo><mi>S</mi><mi>E</mi><mi>N</mi><mi>S</mi><mi mathvariant="normal">/</mi><msup><mn>2</mn><mrow><mn>2</mn><mn>1</mn></mrow></msup><mo>)</mo><mi mathvariant="normal">/</mi><msup><mn>2</mn><mrow><mn>1</mn><mn>5</mn></mrow></msup></mrow><annotation encoding="application/x-tex">P = D1*SENS - OFF = (D1*SENS / 2^{21}) / 2^{15}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.02778em;">D</span><span class="mord mathrm">1</span><span class="mbin">∗</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathit" style="margin-right:0.05764em;">E</span><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mbin">−</span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mrel">=</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.02778em;">D</span><span class="mord mathrm">1</span><span class="mbin">∗</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathit" style="margin-right:0.05764em;">E</span><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathrm">/</span><span class="mord"><span class="mord mathrm">2</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">2</span><span class="mord mathrm">1</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mclose">)</span><span class="mord mathrm">/</span><span class="mord"><span class="mord mathrm">2</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">1</span><span class="mord mathrm">5</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span><br></div>
+
+<p><code>Tip</code>: C1 C2 .. 等值都来自芯片内置的 PROM 数据，在初始化代码时读取<br><img src="/resource/fly/ms5611_prom.png" alt="ms5611_prom"></p>
+<p><strong><code>Tip:</code> 并且由于此芯片在 大于20°C下比较准，低于20°C气压误差骤增，所以还必须做二阶温度补偿 </strong><br><img src="/resource/fly/ms5611_second_order.png" alt="ms5611_second_order"></p>
+<ul>
+<li>气压值到高度的解算 <code>float getEstimatedAltitude(int32_t baroPressure)</code><br>气压转换高度公式为：<div style="text-align:center;"><br><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi>l</mi><mi>t</mi><mi>i</mi><mi>t</mi><mi>u</mi><mi>d</mi><mi>e</mi><mo>=</mo><mn>4</mn><mn>4</mn><mn>3</mn><mn>3</mn><mn>0</mn><mn>0</mn><mn>0</mn><mo>∗</mo><mo>[</mo><mn>1</mn><mo>−</mo><mo>(</mo><mfrac><mrow><mi>p</mi></mrow><mrow><msub><mi>p</mi><mrow><mn>0</mn></mrow></msub></mrow></mfrac><msup><mo>)</mo><mrow><mfrac><mrow><mn>1</mn></mrow><mrow><mn>5</mn><mi mathvariant="normal">.</mi><mn>2</mn><mn>5</mn><mn>5</mn></mrow></mfrac></mrow></msup><mo>]</mo></mrow><annotation encoding="application/x-tex">Altitude = 4 433 000 * [1 - (\frac{p}{p_{0}})^{\frac{1}{5.255}}]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.96102em;"></span><span class="strut bottom" style="height:1.4421279999999999em;vertical-align:-0.481108em;"></span><span class="base textstyle uncramped"><span class="mord mathit">A</span><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">t</span><span class="mord mathit">i</span><span class="mord mathit">t</span><span class="mord mathit">u</span><span class="mord mathit">d</span><span class="mord mathit">e</span><span class="mrel">=</span><span class="mord mathrm">4</span><span class="mord mathrm">4</span><span class="mord mathrm">3</span><span class="mord mathrm">3</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mbin">∗</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mbin">−</span><span class="mopen">(</span><span class="mord reset-textstyle textstyle uncramped"><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.345em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord"><span class="mord mathit">p</span><span class="vlist"><span style="top:0.15em;margin-right:0.07142857142857144em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-scriptstyle scriptscriptstyle cramped"><span class="mord scriptscriptstyle cramped"><span class="mord mathrm">0</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.44610799999999995em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">p</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span><span class="mclose"><span class="mclose">)</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord reset-scriptstyle scriptstyle uncramped"><span class="sizing reset-size5 size5 reset-scriptstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.345em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-scriptstyle scriptscriptstyle cramped"><span class="mord scriptscriptstyle cramped"><span class="mord mathrm">5</span><span class="mord mathrm">.</span><span class="mord mathrm">2</span><span class="mord mathrm">5</span><span class="mord mathrm">5</span></span></span></span><span style="top:-0.22142857142857142em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-scriptstyle textstyle uncramped frac-line"></span></span><span style="top:-0.394em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-scriptstyle scriptscriptstyle uncramped"><span class="mord scriptscriptstyle uncramped"><span class="mord mathrm">1</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="sizing reset-size5 size5 reset-scriptstyle textstyle uncramped nulldelimiter"></span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mclose">]</span></span></span></span><br></div>
+
+</li>
+</ul>
+<p><code>tip</code>: Altitude 为高度(cm)；  P 为温度补偿后的气压值； <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mrow><mn>0</mn></mrow></msub></mrow><annotation encoding="application/x-tex">P_{0} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.13889em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathrm">0</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span>标准大气压(101 325 Pa)或者基准气压。</p>
+<hr>
+<p>完整源码，包含 测试 和 所需的I2C驱动.</p>
+
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/26/git-服务器搭建.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Git 服务器搭建</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="飞控开发" data-title="飞控开发－－气压计/高度计(MS5611)" data-url="http://blog.falleaf.com/2016/03/05/飞控开发.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luoye"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 LuoYe
+        
+        <span id="busuanzi_container_site_uv">|&nbsp;您是本站第 <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 位访客</span>
+        
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten&nbsp;|&nbsp;<a href="/sitemap.xml" target="_blank">sitemap</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>

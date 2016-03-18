@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>find-linux-command | LuoYe&#39;blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="linux find,linux命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="find-linux-command">
+<meta property="og:url" content="http://blog.falleaf.com/2015/09/07/find-linux-command.html">
+<meta property="og:site_name" content="LuoYe'blog">
+<meta property="og:description" content="linux find,linux命令">
+<meta property="og:image" content="http://falleaf.oss-cn-shenzhen.aliyuncs.com/blog_source%2F2015-09%2Flinux-command.jpg">
+<meta property="og:updated_time" content="2016-02-29T08:48:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="find-linux-command">
+<meta name="twitter:description" content="linux find,linux命令">
+<meta name="twitter:image" content="http://falleaf.oss-cn-shenzhen.aliyuncs.com/blog_source%2F2015-09%2Flinux-command.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+
+
+	
+	<form id="search">
+	<input type="text" class="st-search-launcher" placeholder="search..."><button><i class="fa fa-search"></i> </button>
+	</form>
+	
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','1n-7fx-Zx9q6ig4dxYeV','2.0.0');
+</script>
+
+
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+
+
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">叶子的背叛</p>
+		
+<div>
+					<section class="switch-part switch-part1">
+						<nav class="header-menu">
+							<ul>
+							
+								<li><a href="/">主页</a></li>
+					        
+								<li><a href="/archives">归档</a></li>
+					        
+							</ul>
+						</nav>
+						<nav class="header-nav">
+							<div class="social">
+								
+									<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+						        
+									<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+						        
+							</div>
+						</nav>
+					</section>
+					
+					
+					<section class="switch-part switch-part2">
+						<div class="widget tagcloud" id="js-tagcloud">
+							<a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/smt32/" style="font-size: 10px;">smt32</a> <a href="/tags/飞控/" style="font-size: 10px;">飞控</a>
+						</div>
+					</section>
+					
+					
+					
+					<section class="switch-part switch-part3">
+						<div id="js-friends">
+						
+				          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hexo.io">hexo</a>
+				        
+				        </div>
+					</section>
+					
+
+					
+					
+					<section class="switch-part switch-part4">
+					
+						<div id="js-aboutme">一只游走于IT界的半调子猿猴...</div>
+					</section>
+									
+</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">LuoYe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+			</hgroup>
+
+			
+			<p class="header-subtitle">叶子的背叛</p>
+			
+
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-find-linux-command" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      find-linux-command
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2015-09-07</i>
+	      
+	      <i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>&nbsp;view
+	      
+	      
+	<i class="fa fa-file-word-o"></i>1,168&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+
+	  	
+<div class="gallery">
+  <div class="photoset"  style="text-align: center; width: 85%; margin:auto;">
+    
+      
+        <img src="http://falleaf.oss-cn-shenzhen.aliyuncs.com/blog_source%2F2015-09%2Flinux-command.jpg">
+      
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+		
+<div id="toc" class="toc-article">
+	<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令格式："><span class="toc-number">1.</span> <span class="toc-text">命令格式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令参数："><span class="toc-number">2.</span> <span class="toc-text">命令参数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令选项："><span class="toc-number">3.</span> <span class="toc-text">命令选项：</span></a></li></ol>
+</div>
+
+
+        <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Linux下find命令在目录结构中搜索文件，并执行指定的操作。Linux下find命令提供了相当多的查找条件，功能很强大.在运行一个非常消耗资源的find命令时，很多人都倾向于把它放在后台执行，因为遍历一个大的文件系统可能会花费很长的时间(这里是指30G字节以上的文件系统)</p>
+</blockquote>
+<h3 id="命令格式："><a href="#命令格式：" class="headerlink" title="命令格式："></a>命令格式：</h3><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ <span class="keyword">find</span> pathname -<span class="keyword">options</span> [-<span class="keyword">print</span> -exec -ok ...]</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="命令参数："><a href="#命令参数：" class="headerlink" title="命令参数："></a>命令参数：</h3><p>pathname: find命令所查找的目录路径。例如用.来表示当前目录，用/来表示系统根目录。 </p>
+<p>-print： find命令将匹配的文件输出到标准输出。 </p>
+<p>-exec： find命令对匹配的文件执行该参数所给出的shell命令。相应命令的形式为’command’ {  } \;，注意{   }和\；之间的空格。 </p>
+<p>-ok： 和-exec的作用相同，只不过以一种更为安全的模式来执行该参数所给出的shell命令，在执行每一个命令之前，都会给出提示，让用户来确定是否执行。</p>
+<h3 id="命令选项："><a href="#命令选项：" class="headerlink" title="命令选项："></a>命令选项：</h3><ul>
+<li><p>-name&nbsp;&nbsp;&nbsp;&nbsp;按照文件名查找文件。</p>
+</li>
+<li><p>-perm&nbsp;&nbsp;&nbsp;&nbsp;按照文件权限来查找文件。</p>
+</li>
+<li><p>-prune &nbsp;&nbsp;&nbsp;&nbsp;使用这一选项可以使find命令不在当前指定的目录中查找，如果同时使用-depth选项，那么-prune将被find命令忽略。</p>
+</li>
+<li><p>-user &nbsp;&nbsp;&nbsp;&nbsp;按照文件属主来查找文件。</p>
+</li>
+<li><p>-group&nbsp;&nbsp;&nbsp;&nbsp;按照文件所属的组来查找文件。</p>
+</li>
+<li><p>-mtime -n +n&nbsp;&nbsp;&nbsp;&nbsp;按照文件的更改时间来查找文件， - n表示文件更改时间距现在n天以内，+ n表示文件更改时间距现在n天以前。find命令还有-atime和-ctime 选项，但它们都和-m time选项。</p>
+</li>
+<li><p>-nogroup&nbsp;&nbsp;&nbsp;&nbsp;查找无有效所属组的文件，即该文件所属的组在/etc/groups中不存在。</p>
+</li>
+<li><p>-nouser&nbsp;&nbsp;&nbsp;&nbsp;查找无有效属主的文件，即该文件的属主在/etc/passwd中不存在。</p>
+</li>
+<li><p>-newer file1 ! file2&nbsp;&nbsp;&nbsp;&nbsp;查找更改时间比文件file1新但比文件file2旧的文件。</p>
+</li>
+<li><p>-type&nbsp;&nbsp;&nbsp;&nbsp;查找某一类型的文件，诸如：</p>
+<blockquote>
+<p>b - 块设备文件。<br>d - 目录。<br>c - 字符设备文件。<br>p - 管道文件。<br>l - 符号链接文件。<br>f - 普通文件。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>-size n：[c]查找文件长度为n块的文件，带有c时表示文件长度以字节计。</p>
+</li>
+<li><p>-depth：在查找文件时，首先查找当前目录中的文件，然后再在其子目录中查找。</p>
+</li>
+<li><p>-fstype：查找位于某一类型文件系统中的文件，这些文件系统类型通常可以在配置文件/etc/fstab中找到，该配置文件中包含了本系统中有关文件系统的信息。</p>
+</li>
+<li><p>-mount：在查找文件时不跨越文件系统mount点。</p>
+</li>
+<li><p>-follow：如果find命令遇到符号链接文件，就跟踪至链接所指向的文件。</p>
+</li>
+<li><p>-cpio：对匹配的文件使用cpio命令，将这些文件备份到磁带设备中。</p>
+</li>
+</ul>
+<p>另外,下面三个的区别:</p>
+<ul>
+<li><p>-amin n   查找系统中最后N分钟访问的文件</p>
+</li>
+<li><p>-atime n  查找系统中最后n*24小时访问的文件</p>
+</li>
+<li><p>-cmin n   查找系统中最后N分钟被改变文件状态的文件</p>
+</li>
+<li><p>-ctime n  查找系统中最后n*24小时被改变文件状态的文件</p>
+</li>
+<li><p>-mmin n   查找系统中最后N分钟被改变文件数据的文件</p>
+</li>
+<li><p>-mtime n  查找系统中最后n*24小时被改变文件数据的文件</p>
+</li>
+</ul>
+<p><strong><code>传送门：</code></strong></p>
+<ol>
+<li><a href="http://www.cnblogs.com/peida/archive/2012/11/13/2767374.html" target="_blank" rel="external">竹子博客</a></li>
+</ol>
+
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/26/git-服务器搭建.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Git 服务器搭建
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/05/Hexo+Github 免费建博客.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hexo+Github 免费建博客</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="find-linux-command" data-title="find-linux-command" data-url="http://blog.falleaf.com/2015/09/07/find-linux-command.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luoye"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 LuoYe
+        
+        <span id="busuanzi_container_site_uv">|&nbsp;您是本站第 <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 位访客</span>
+        
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten&nbsp;|&nbsp;<a href="/sitemap.xml" target="_blank">sitemap</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
