@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>stm32 常见问题汇总.md | LuoYe&#39;blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Q：使用 j-link 仿真mdk 不识别出现”No ST-LINK detected”!﻿A：MDK 中j-link 的配置项错误导致。
+
+
+Options for Tartet .. -&amp;gt; Debug  ==J-LINK/J-TRACE Cortex  –&amp;gt; Settings  –&amp;gt; ort == JTAG/SW
+Options for Tartet .. -&amp;gt; Ut">
+<meta property="og:type" content="article">
+<meta property="og:title" content="stm32 常见问题汇总.md">
+<meta property="og:url" content="http://blog.falleaf.com/2016/03/18/stm32-常见问题汇总-md.html">
+<meta property="og:site_name" content="LuoYe'blog">
+<meta property="og:description" content="Q：使用 j-link 仿真mdk 不识别出现”No ST-LINK detected”!﻿A：MDK 中j-link 的配置项错误导致。
+
+
+Options for Tartet .. -&amp;gt; Debug  ==J-LINK/J-TRACE Cortex  –&amp;gt; Settings  –&amp;gt; ort == JTAG/SW
+Options for Tartet .. -&amp;gt; Ut">
+<meta property="og:image" content="http://blog.falleaf.com/resource/stm32/jtag.jpg">
+<meta property="og:image" content="http://blog.falleaf.com/resource/stm32/jtag_pin.png">
+<meta property="og:image" content="http://blog.falleaf.com/resource/stm32/stm32_bootx.png">
+<meta property="og:updated_time" content="2016-03-18T08:28:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="stm32 常见问题汇总.md">
+<meta name="twitter:description" content="Q：使用 j-link 仿真mdk 不识别出现”No ST-LINK detected”!﻿A：MDK 中j-link 的配置项错误导致。
+
+
+Options for Tartet .. -&amp;gt; Debug  ==J-LINK/J-TRACE Cortex  –&amp;gt; Settings  –&amp;gt; ort == JTAG/SW
+Options for Tartet .. -&amp;gt; Ut">
+<meta name="twitter:image" content="http://blog.falleaf.com/resource/stm32/jtag.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+
+
+	
+	<form id="search">
+	<input type="text" class="st-search-launcher" placeholder="search..."><button><i class="fa fa-search"></i> </button>
+	</form>
+	
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','1n-7fx-Zx9q6ig4dxYeV','2.0.0');
+</script>
+
+
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+
+
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">叶子的背叛</p>
+		
+<div>
+					<section class="switch-part switch-part1">
+						<nav class="header-menu">
+							<ul>
+							
+								<li><a href="/">主页</a></li>
+					        
+								<li><a href="/archives">归档</a></li>
+					        
+							</ul>
+						</nav>
+						<nav class="header-nav">
+							<div class="social">
+								
+									<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+						        
+									<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+						        
+							</div>
+						</nav>
+					</section>
+					
+					
+					<section class="switch-part switch-part2">
+						<div class="widget tagcloud" id="js-tagcloud">
+							<a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/smt32/" style="font-size: 10px;">smt32</a> <a href="/tags/stm32/" style="font-size: 10px;">stm32</a> <a href="/tags/飞控/" style="font-size: 10px;">飞控</a>
+						</div>
+					</section>
+					
+					
+					
+					<section class="switch-part switch-part3">
+						<div id="js-friends">
+						
+				          <a target="_blank" class="main-nav-link switch-friends-link" href="http://hexo.io">hexo</a>
+				        
+				        </div>
+					</section>
+					
+
+					
+					
+					<section class="switch-part switch-part4">
+					
+						<div id="js-aboutme">一只游走于IT界的半调子猿猴...</div>
+					</section>
+									
+</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">LuoYe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"><a href="/">LuoYe</a></h1>
+			</hgroup>
+
+			
+			<p class="header-subtitle">叶子的背叛</p>
+			
+
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Luo-Ye" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-stm32-常见问题汇总-md" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      stm32 常见问题汇总.md
+    </h1>
+  
+
+      </header>
+
+  
+    <div class="article-meta">
+      <p>
+	      <i class="fa fa-calendar"></i>2016-03-18</i>
+	      
+	      <i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>&nbsp;view
+	      
+	      
+	<i class="fa fa-file-word-o"></i>1,112&nbsp;word
+
+	      
+
+
+	      </p>
+    </div>
+    
+
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+	<i class="fa fa-tags"> </i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stm32/">stm32</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+
+
+	  	
+  
+    <div class="article-entry" itemprop="articleBody">
+
+      
+		
+<div id="toc" class="toc-article">
+	<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Q：使用-j-link-仿真mdk-不识别出现”No-ST-LINK-detected”"><span class="toc-text">Q：使用 j-link 仿真mdk 不识别出现”No ST-LINK detected”!</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q：PA13-、-PA14-、-PA15、PB3、PB4-无法作为-GPIO-使用-！"><span class="toc-text">Q：PA13 、 PA14 、 PA15、PB3、PB4 无法作为 GPIO 使用 ！</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-什么时候需要用到-AFIO"><span class="toc-text">Q:  什么时候需要用到 AFIO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-BOOT0-、-BOOT1-PB2-的使用"><span class="toc-text">Q:  BOOT0 、 BOOT1(PB2) 的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-stm32f4-discovery-开发板-USART1-输出乱码"><span class="toc-text">Q:  stm32f4 discovery 开发板 USART1 输出乱码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-Keil-编译出错：xxx-declaration-may-not-appear-after-executable-statement-in-block"><span class="toc-text">Q:  Keil 编译出错：xxx declaration may not appear after executable statement in block</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-定义-bool-类型变量报错"><span class="toc-text">Q:  定义 bool 类型变量报错.</span></a></li></ol>
+</div>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><ul>
+<li><h4 id="Q：使用-j-link-仿真mdk-不识别出现”No-ST-LINK-detected”"><a href="#Q：使用-j-link-仿真mdk-不识别出现”No-ST-LINK-detected”" class="headerlink" title="Q：使用 j-link 仿真mdk 不识别出现”No ST-LINK detected”!"></a>Q：使用 j-link 仿真mdk 不识别出现”No ST-LINK detected”!</h4>﻿<br>A：MDK 中j-link 的配置项错误导致。</li>
+</ul>
+<ol>
+<li>Options for Tartet .. -&gt; Debug  ==J-LINK/J-TRACE Cortex  –&gt; Settings  –&gt; ort == JTAG/SW</li>
+<li>Options for Tartet .. -&gt; Utilities –&gt;Use Tarte Driver for Flash Programming ==  J-LINK/J-TRACE Cortex</li>
+</ol>
+<hr>
+<a id="more"></a>
+<ul>
+<li><h4 id="Q：PA13-、-PA14-、-PA15、PB3、PB4-无法作为-GPIO-使用-！"><a href="#Q：PA13-、-PA14-、-PA15、PB3、PB4-无法作为-GPIO-使用-！" class="headerlink" title="Q：PA13 、 PA14 、 PA15、PB3、PB4 无法作为 GPIO 使用 ！"></a>Q：PA13 、 PA14 、 PA15、PB3、PB4 无法作为 GPIO 使用 ！</h4></li>
+</ul>
+<p>A： stm32 上电后这几个管脚默认作为 jtag 功能脚.<br><img src="/resource/stm32/jtag.jpg" alt="jtag"></p>
+<p>想要释放这几个管脚作为普通 GPIO 使用，必须切换此脚的功能.否则对管脚的所有 GPIO  操作都不会生效.<br>需要配置的寄存器为：<br><strong>AFIO_MAPR[26:24]</strong>  –&gt; <code>SWJ_CFG</code>(Serial Wire JTAG Configuration)<br><img src="/resource/stm32/jtag_pin.png" alt="jtag_pin"></p>
+<p><strong> 注: </strong> 1.<em>需要特别注意的是,在操作 <code>AFIO_MAPR</code> 寄存器之前必须先打开 <code>AFIO</code> 时钟.</em><br>2.<em>在使用 jtag 调试代码时,如果代码操作 <code>AFIO_MAPR</code> 寄存器来禁止  SWJ 功能 会报错.  </em></p>
+<hr>
+<ul>
+<li><h4 id="Q-什么时候需要用到-AFIO"><a href="#Q-什么时候需要用到-AFIO" class="headerlink" title="Q:  什么时候需要用到 AFIO"></a>Q:  什么时候需要用到 AFIO</h4></li>
+</ul>
+<p>A: 对寄存器 <code>AFIO_EVCR</code> ， <code>AFIO_MAPR</code>  和  <code>AFIO_EXTICRX</code>   进行读写操作前，应当首先打开 AFIO的时钟。</p>
+<hr>
+<ul>
+<li><h4 id="Q-BOOT0-、-BOOT1-PB2-的使用"><a href="#Q-BOOT0-、-BOOT1-PB2-的使用" class="headerlink" title="Q:  BOOT0 、 BOOT1(PB2) 的使用"></a>Q:  BOOT0 、 BOOT1(PB2) 的使用</h4></li>
+</ul>
+<p>A:  <a href="">STM32中文参考手册:2.4[P33]</a><br>STM32有三种启动模式，如下表：<br><img src="/resource/stm32/stm32_bootx.png" alt="image"></p>
+<p>1.ST公司在出厂时给 MCU 的 ROM 中固化了一段启动代码(类似 bootloader，并且无法修改/删除)<br>用于 ISP (In-system programming).所以想要使用 串口进行 ISP 烧录程序必须从表中 模式2 启动!</p>
+<p><em>注： 因此在使用 ISP 烧录程序时后需要把，BOOT0置 0 ，否者导致程序不运行.</em></p>
+<p>2.BOOT1 即管脚 PB2，只在系统上电后 <strong>第4个上升沿时钟</strong> 用于控制启动模式。之后就被释放，可用于正常的 GPIO。<br>所以一般 PB2 管脚的硬件电路设计都连接一下拉电阻接地.</p>
+<hr>
+<ul>
+<li><h4 id="Q-stm32f4-discovery-开发板-USART1-输出乱码"><a href="#Q-stm32f4-discovery-开发板-USART1-输出乱码" class="headerlink" title="Q:  stm32f4 discovery 开发板 USART1 输出乱码"></a>Q:  stm32f4 discovery 开发板 USART1 输出乱码</h4></li>
+</ul>
+<p>A:  由于 开发板把 PA9 、PA10 两个管脚用于 usb otg 功能，所以需要使用 USART1 需要把对应引脚复用到 PD6、PD7</p>
+<hr>
+<ul>
+<li><h4 id="Q-Keil-编译出错：xxx-declaration-may-not-appear-after-executable-statement-in-block"><a href="#Q-Keil-编译出错：xxx-declaration-may-not-appear-after-executable-statement-in-block" class="headerlink" title="Q:  Keil 编译出错：xxx declaration may not appear after executable statement in block"></a>Q:  Keil 编译出错：xxx declaration may not appear after executable statement in block</h4></li>
+</ul>
+<p>A: 这是由于变量声明在语句之后，c++里面是正常的，现在的很多c编译器也允许。但是最早的c是不许这么写的，keil 也要求所有的局部变量必须在函数开头声明。<br><figure class="highlight aspectj"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">PLLCON = <span class="number">1</span>; <span class="comment">// 这个(以及下面若干行)就是所谓的“executable statement ”</span></span><br><span class="line">......</span><br><span class="line">uint8 sec; <span class="comment">// 这就是“declaration ”,会在此处报错</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<ul>
+<li><h4 id="Q-定义-bool-类型变量报错"><a href="#Q-定义-bool-类型变量报错" class="headerlink" title="Q:  定义 bool 类型变量报错."></a>Q:  定义 <code>bool</code> 类型变量报错.</h4></li>
+</ul>
+<p>A:  默认情况下 stm32 库是不支持 <code>bool</code> 类型的.需要包含头文件： <code>stdbool.h</code></p>
+<hr>
+
+      
+    </div>
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/05/飞控开发.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">飞控开发－－气压计/高度计(MS5611)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="stm32-常见问题汇总-md" data-title="stm32 常见问题汇总.md" data-url="http://blog.falleaf.com/2016/03/18/stm32-常见问题汇总-md.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luoye"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 LuoYe
+        
+        <span id="busuanzi_container_site_uv">|&nbsp;您是本站第 <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 位访客</span>
+        
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten&nbsp;|&nbsp;<a href="/sitemap.xml" target="_blank">sitemap</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
